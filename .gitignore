@@ -1,0 +1,8 @@
+# herramientas locales opcionales (rojo, lune, luau-lsp)
+.tools/
+# dump crudo de la API de Roblox (se puede volver a descargar; ver tools/sim/gen_api.py)
+tools/sim/data/API-Dump.json
+__pycache__/
+*.pyc
+*.rbxlx.lock
+*.rbxl.lock
