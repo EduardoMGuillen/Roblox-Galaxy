@@ -1,0 +1,1796 @@
+{
+  "_meta": {
+    "generated": "2026-11-17",
+    "how_verified": "Roblox public web APIs only (no Studio, no auth). economy.roblox.com/v2/assets/<id>/details for AssetTypeId/name/creator; apis.roblox.com/toolbox-service for search + decal->image (textureId) resolution; thumbnails.roblox.com for visual inspection.",
+    "important_limitation": "assetdelivery.roblox.com now answers 401 \"Authentication required\" for almost every third-party asset (images, decals, models, meshes). Only assets owned by Roblox / Roblox staff art accounts (Roblox, RBLXImagineer, Crykee) still download anonymously. So entries marked verification=thumbnail-only could NOT have their real bytes, exact pixel size or file format checked: width/height are null and preview_width/preview_height are the size of the Roblox-rendered thumbnail (max 768x432 or 700x700, aspect ratio preserved, alpha preserved). Every such image was looked at on contact sheets, its AssetTypeId is 1 (Image) and Roblox serves a rendered thumbnail for it (state Completed).",
+    "id_kind": "All image entries are IMAGE asset ids (AssetTypeId 1), resolved from free Creator Store decals. Use as rbxassetid://<id>.",
+    "runtime_risk": "Whether a third-party image loads inside your experience could not be tested from outside Studio. All came from decals listed free+published on the Creator Store, but confirm in Studio that each id renders; fall back to \"alternates\" if one does not. Entries by Roblox/RBLXImagineer/Crykee are the safest.",
+    "wrap_seam_ratio": "For equirectangular maps: mean colour difference between the left and right edge columns divided by the mean difference between neighbouring columns. ~1 = tiles seamlessly; all primaries were also inspected rolled by 50% and show no visible seam.",
+    "tinting": "Greyscale/white entries (ring_white, ring_thin, extra_gas_giant_grey, accretion_disk, smoke_cloud, glow_soft) are meant to be coloured in code (ImageColor3 / Decal.Color3 / SpecialMesh.VertexColor / ParticleEmitter.Color).",
+    "previews": "assets/preview/*.png"
+  },
+  "sphere_mesh": {
+    "id": 6441034336,
+    "name": "RenderMesh",
+    "creator": "RBLXImagineer",
+    "created": "2021-02-25",
+    "asset_type_id": 4,
+    "source": "MeshId found inside the Roblox-owned model 10980780693 \"Space Station Architecture Pack - Beyond the Dark\"",
+    "format": "Roblox mesh version 4.01 (binary), 4 LODs",
+    "vertices": 439,
+    "triangles_lod0": 760,
+    "lod_triangles": [
+      760,
+      380,
+      190,
+      32
+    ],
+    "radius_in_mesh_units": 8.00446,
+    "bounding_box": [
+      16.0089,
+      16.0089,
+      16.0089
+    ],
+    "centered_at_origin": true,
+    "scale_for_1_stud_radius": 0.12493,
+    "uv": "equirectangular",
+    "uv_details": "Exact lat/long mapping (max error 5e-7): v = 0 at the +Y pole (top row of the image) and v = 1 at the -Y pole; u = atan2(x, z)/(2*pi) + 0.2 (mod 1), increasing to the right when seen from outside, so maps are not mirrored. u spans the full 0..1 with duplicated seam vertices (no wrapped triangles). 20 longitude segments x 20 latitude bands.",
+    "normals": "smooth, pointing outward; triangle winding outward (renders from outside).",
+    "verification": "full-download: mesh file parsed (positions, normals, UVs, faces, LODs) and software-rendered with the terra map (preview/sphere_mesh_render.png, preview/sphere_mesh_uv.png).",
+    "notes": "Use as SpecialMesh{MeshType=FileMesh, MeshId=\"rbxassetid://6441034336\", TextureId=\"rbxassetid://<map>\", Scale=Vector3.one*(R/8.00446)} for a sphere of radius R studs (SpecialMesh ignores the Part size). Only 20 segments around, so the silhouette is a 20-sided polygon and looks slightly faceted on very large planets; shading is smooth. If MeshPart is used instead, Size = Vector3.one*(2R).",
+    "alternates": [
+      10061232
+    ],
+    "alternates_info": {
+      "10061232": {
+        "name": "Earth",
+        "creator": "Roblox",
+        "note": "VERIFIED NOT equirectangular. v1.00 text mesh, 960 verts / 320 tris (icosphere), radius 0.5 stud after the v1.00 0.5x correction (stored radius 1.0), centered. UVs are a hand-packed island atlas that only fits its own 256x256 texture 10061209; ordinary planet maps will NOT wrap on it."
+      },
+      "unverified_higher_poly_candidates": "Mesh ids taken from Creator Store MeshPart assets whose names say UV sphere; their files need auth so geometry/UVs were NOT checked: 7517212921 (\"UV Sphere\", PinoyGeek75), 11945427527 (\"UV sphere\", Mixis_4), 7035889616 (\"UVSphere\", zomts), 14255874510 (\"Earth UV Sphere MESH\", soupysoupstroy). Test in Studio before relying on them."
+    }
+  },
+  "terra": {
+    "id": 14113088653,
+    "name": "Earth",
+    "creator": "VipaulT",
+    "created": "2023-07-18",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Earth-like with clouds. The Roblox-owned Earth texture 10061209 is NOT an alternative: it is a 256x256 atlas for mesh 10061232 only.",
+    "alternates": [
+      18791670217,
+      15297215603
+    ],
+    "wrap_seam_ratio": 1.28,
+    "alternates_info": {
+      "18791670217": {
+        "name": "Earth texture map",
+        "creator": "VipaulT",
+        "created": "2024-08-04"
+      },
+      "15297215603": {
+        "name": "Earth Texture",
+        "creator": "220goodboy",
+        "created": "2023-11-08"
+      }
+    }
+  },
+  "terra_noclouds": {
+    "id": 15297215603,
+    "name": "Earth Texture",
+    "creator": "220goodboy",
+    "created": "2023-11-08",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Earth without clouds (pair with clouds_alpha layer).",
+    "alternates": [],
+    "wrap_seam_ratio": 0.43,
+    "alternates_info": {}
+  },
+  "rocanox": {
+    "id": 5184963957,
+    "name": "Mercury Full Texture",
+    "creator": "Volgenian",
+    "created": "2020-06-15",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Grey cratered Mercury-type rock.",
+    "alternates": [
+      5466037974,
+      99713190418203
+    ],
+    "wrap_seam_ratio": 1.2,
+    "alternates_info": {
+      "5466037974": {
+        "name": "Dione Full Texture",
+        "creator": "Volgenian",
+        "created": "2020-07-30"
+      },
+      "99713190418203": {
+        "name": "Untitled1609_20261028223907",
+        "creator": "EarthSolarSystem03",
+        "created": "2026-10-29"
+      }
+    }
+  },
+  "dunaris": {
+    "id": 8637912772,
+    "name": "Mars-Like Planet Texture",
+    "creator": "2012Planetboy",
+    "created": "2022-01-25",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Ochre desert / Mars-like.",
+    "alternates": [
+      5185063742,
+      12373733403,
+      9865763206
+    ],
+    "wrap_seam_ratio": 1.29,
+    "alternates_info": {
+      "5185063742": {
+        "name": "Mars Full Texture",
+        "creator": "Volgenian",
+        "created": "2020-06-15"
+      },
+      "12373733403": {
+        "name": "Mars texture",
+        "creator": "FrozenIIElsa12",
+        "created": "2023-02-04"
+      },
+      "9865763206": {
+        "name": "Planet Texture",
+        "creator": "2012Planetboy",
+        "created": "2022-06-09"
+      }
+    }
+  },
+  "glaciera": {
+    "id": 109017797659108,
+    "name": "Europa texture map",
+    "creator": "VipaulT",
+    "created": "2025-04-14",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Blue-white ice with Europa-style cracks. Pale blue-white; tint bluer with SpecialMesh.VertexColor if wanted. Alternate 8629881863 is a saturated blue ice map.",
+    "alternates": [
+      8629881863,
+      101238541645343,
+      5449824764
+    ],
+    "wrap_seam_ratio": 2.01,
+    "alternates_info": {
+      "8629881863": {
+        "name": "Blue Moon Texture",
+        "creator": "2012Planetboy",
+        "created": "2022-01-24"
+      },
+      "101238541645343": {
+        "name": "Aurethia",
+        "creator": "Initiate_SpaceHack",
+        "created": "2025-08-05"
+      },
+      "5449824764": {
+        "name": "Europa Full Texture",
+        "creator": "Volgenian",
+        "created": "2020-07-28"
+      }
+    }
+  },
+  "jovian": {
+    "id": 78908883189888,
+    "name": "Jupiter Texture",
+    "creator": "Ryleybobrhysface2",
+    "created": "2025-11-26",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Jupiter cream/brown bands.",
+    "alternates": [
+      5449794050,
+      7204561715,
+      8727180370
+    ],
+    "wrap_seam_ratio": 1.1,
+    "alternates_info": {
+      "5449794050": {
+        "name": "Jupiter Full Texture V2",
+        "creator": "Volgenian",
+        "created": "2020-07-28"
+      },
+      "7204561715": {
+        "name": "Images/Texture",
+        "creator": "RealElisWorldGaming",
+        "created": "2021-08-05"
+      },
+      "8727180370": {
+        "name": "Cartoon-Like Jupiter Texture",
+        "creator": "2012Planetboy",
+        "created": "2022-02-04"
+      }
+    }
+  },
+  "inferno": {
+    "id": 17886692408,
+    "name": "Lava planet texture",
+    "creator": "VipaulT",
+    "created": "2024-06-16",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Dark volcanic rock with orange lava.",
+    "alternates": [
+      131038126435184,
+      135183112630181
+    ],
+    "wrap_seam_ratio": 1.1,
+    "alternates_info": {
+      "131038126435184": {
+        "name": "Lava Planet #1",
+        "creator": "0wt1st1kExcitement",
+        "created": "2025-10-05"
+      },
+      "135183112630181": {
+        "name": "Phailinsito",
+        "creator": "V1l3C0rrup10n",
+        "created": "2025-11-08"
+      }
+    }
+  },
+  "amethyst": {
+    "id": 9848378750,
+    "name": "Planet texture",
+    "creator": "2012Planetboy",
+    "created": "2022-06-07",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Purple rocky/crystalline surface.",
+    "alternates": [
+      94427176971281,
+      71098980565480
+    ],
+    "wrap_seam_ratio": 1.23,
+    "alternates_info": {
+      "94427176971281": {
+        "name": "Seyron",
+        "creator": "Initiate_SpaceHack",
+        "created": "2025-08-05"
+      },
+      "71098980565480": {
+        "name": "FarOut texture map",
+        "creator": "V1l3C0rrup10n",
+        "created": "2025-06-29"
+      }
+    }
+  },
+  "aureon": {
+    "id": 106225721938856,
+    "name": "Saturn texture map recreation",
+    "creator": "VipaulT",
+    "created": "2025-03-13",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Golden gas giant.",
+    "alternates": [
+      12522832961,
+      5029102172,
+      18781300959
+    ],
+    "wrap_seam_ratio": 2.9,
+    "alternates_info": {
+      "12522832961": {
+        "name": "Images/Gas Giant I",
+        "creator": "nationtheworld2",
+        "created": "2023-02-18"
+      },
+      "5029102172": {
+        "name": "Saturn Texture Map",
+        "creator": "Bonzzyx1508",
+        "created": "2020-05-14"
+      },
+      "18781300959": {
+        "name": "Gas Giant Texture 2",
+        "creator": "dqMint",
+        "created": "2024-08-03"
+      }
+    }
+  },
+  "nebulon": {
+    "id": 110852519379669,
+    "name": "Neptune texture",
+    "creator": "lucaacojocaru1",
+    "created": "2024-09-21",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Blue-violet gas giant. Mostly smooth bands with a dark storm spot; alternate 132919963336768 is more violet with stronger swirls.",
+    "alternates": [
+      132919963336768,
+      80052805244491,
+      105774418531014
+    ],
+    "wrap_seam_ratio": 0.99,
+    "alternates_info": {
+      "132919963336768": {
+        "name": "Untitled40_20260420185425",
+        "creator": "ItsDoomytime",
+        "created": "2026-04-23"
+      },
+      "80052805244491": {
+        "name": "Neptune Texture",
+        "creator": "Planet_TexturePack",
+        "created": "2026-01-15"
+      },
+      "105774418531014": {
+        "name": "Neptune texture map",
+        "creator": "VipaulT",
+        "created": "2026-10-25"
+      }
+    }
+  },
+  "shadowra": {
+    "id": 137143678008653,
+    "name": "Scary Planet Texture",
+    "creator": "Initiate_SpaceHack",
+    "created": "2025-08-27",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Very dark with glowing orange cracks.",
+    "alternates": [
+      129946793554741,
+      132069431800379
+    ],
+    "wrap_seam_ratio": 1.03,
+    "alternates_info": {
+      "129946793554741": {
+        "name": "texture 1",
+        "creator": "MyTipIsCreamy250",
+        "created": "2025-09-10"
+      },
+      "132069431800379": {
+        "name": "Emberon",
+        "creator": "blort_thegreat",
+        "created": "2025-09-10"
+      }
+    }
+  },
+  "quantum": {
+    "id": 103941792770202,
+    "name": "neon",
+    "creator": "BAIQUINHA90",
+    "created": "2026-11-14",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Dark violet with neon magenta/cyan veins. Uploaded 2026-11-14 (very new, could still be removed); alternate 120973144376586 is a teal/violet banded gas giant.",
+    "alternates": [
+      120973144376586,
+      14113890780,
+      82519009094343
+    ],
+    "wrap_seam_ratio": 0.85,
+    "alternates_info": {
+      "120973144376586": {
+        "name": "three's texture map",
+        "creator": "Synceno",
+        "created": "2025-08-20"
+      },
+      "14113890780": {
+        "name": "GJ_504_b",
+        "creator": "VipaulT",
+        "created": "2023-07-19"
+      },
+      "82519009094343": {
+        "name": "Untitled drawing (51)",
+        "creator": "ship_lover56",
+        "created": "2026-05-12"
+      }
+    }
+  },
+  "singularity": {
+    "id": 9856964100,
+    "name": "Planet Texture",
+    "creator": "2012Planetboy",
+    "created": "2022-06-08",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Blue-violet storm world with a dark vortex eye. This is an equirectangular planet map. For a black-hole look add accretion_disk (tintable top-down swirl) or galaxy_sprite as a flat disc/billboard.",
+    "alternates": [
+      132919963336768,
+      140701197049817
+    ],
+    "wrap_seam_ratio": 3.13,
+    "alternates_info": {
+      "132919963336768": {
+        "name": "Untitled40_20260420185425",
+        "creator": "ItsDoomytime",
+        "created": "2026-04-23"
+      },
+      "140701197049817": {
+        "name": "Purple Gas Giant",
+        "creator": "ViewyPanic946",
+        "created": "2025-10-19"
+      }
+    }
+  },
+  "cryostar": {
+    "id": 123306104411190,
+    "name": "1000042187",
+    "creator": "ItsDoomytime",
+    "created": "2026-03-23",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "White/pale-blue ice.",
+    "alternates": [
+      73473873420048,
+      101238541645343,
+      92313558425751
+    ],
+    "wrap_seam_ratio": 1.97,
+    "alternates_info": {
+      "73473873420048": {
+        "name": "plutomap2k",
+        "creator": "bobby_10452",
+        "created": "2025-09-11"
+      },
+      "101238541645343": {
+        "name": "Aurethia",
+        "creator": "Initiate_SpaceHack",
+        "created": "2025-08-05"
+      },
+      "92313558425751": {
+        "name": "Enceladus texture map",
+        "creator": "VipaulT",
+        "created": "2025-05-11"
+      }
+    }
+  },
+  "volcanis": {
+    "id": 91528305407533,
+    "name": "Generic Protoplanet",
+    "creator": "miguel_214846",
+    "created": "2026-07-20",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Bright extreme lava.",
+    "alternates": [
+      138657440471881,
+      130240331946601,
+      109030299453476,
+      131152101595376
+    ],
+    "wrap_seam_ratio": 1.8,
+    "alternates_info": {
+      "138657440471881": {
+        "name": "1000020270",
+        "creator": "lufihadif87",
+        "created": "2026-10-09"
+      },
+      "130240331946601": {
+        "name": "protoplanet texture 1",
+        "creator": "TTT_Gambles",
+        "created": "2026-03-16"
+      },
+      "109030299453476": {
+        "name": "Red Planet Texture #2",
+        "creator": "gerajoao1922",
+        "created": "2025-07-25"
+      },
+      "131152101595376": {
+        "name": "Venus texture",
+        "creator": "TheReal_MingMingMing",
+        "created": "2026-03-26"
+      }
+    }
+  },
+  "zenith": {
+    "id": 10685296286,
+    "name": "Uranus Texture",
+    "creator": "2012Planetboy",
+    "created": "2022-08-22",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Glowing cyan/turquoise bands.",
+    "alternates": [
+      13293403946,
+      104909667763574,
+      107235429004669
+    ],
+    "wrap_seam_ratio": 7.91,
+    "alternates_info": {
+      "13293403946": {
+        "name": "Ocean Planet Texture",
+        "creator": "Wanderer_Grammar",
+        "created": "2023-04-29"
+      },
+      "104909667763574": {
+        "name": "Uranus texture map rebillt",
+        "creator": "VipaulT",
+        "created": "2025-06-25"
+      },
+      "107235429004669": {
+        "name": "Uranus texture map remastered",
+        "creator": "VipaulT",
+        "created": "2025-06-02"
+      }
+    }
+  },
+  "extra_moon": {
+    "id": 8159103611,
+    "name": "moon texture ##",
+    "creator": "Carcat62",
+    "created": "2021-12-02",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Grey Moon map.",
+    "alternates": [
+      10861906479,
+      14113263610
+    ],
+    "wrap_seam_ratio": 1.06,
+    "alternates_info": {
+      "10861906479": {
+        "name": "MoonMap",
+        "creator": "DesignWithMarko",
+        "created": "2022-09-09"
+      },
+      "14113263610": {
+        "name": "moon map",
+        "creator": "VipaulT",
+        "created": "2023-07-18"
+      }
+    }
+  },
+  "extra_venus": {
+    "id": 5184984804,
+    "name": "Venus Atmosphere Full Atmosphere",
+    "creator": "Volgenian",
+    "created": "2020-06-15",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Venus-like cloudy cream/yellow.",
+    "alternates": [
+      115202846443178,
+      14113073617
+    ],
+    "wrap_seam_ratio": 1.1,
+    "alternates_info": {
+      "115202846443178": {
+        "name": "Venus texture map remake",
+        "creator": "VipaulT",
+        "created": "2025-03-17"
+      },
+      "14113073617": {
+        "name": "Venus texture",
+        "creator": "VipaulT",
+        "created": "2023-07-18"
+      }
+    }
+  },
+  "extra_green_alien": {
+    "id": 81055992483777,
+    "name": "IMG_7219",
+    "creator": "Afotts",
+    "created": "2026-10-11",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 380,
+    "aspect": 2.021,
+    "notes": "Green alien planet.",
+    "alternates": [
+      8086550571,
+      116039523494750
+    ],
+    "wrap_seam_ratio": 1.2,
+    "alternates_info": {
+      "8086550571": {
+        "name": "####### planet w",
+        "creator": "theminecraftdude3445",
+        "created": "2021-11-24"
+      },
+      "116039523494750": {
+        "name": "Tikerus Planet Map",
+        "creator": "Initiate_SpaceHack",
+        "created": "2025-07-22"
+      }
+    }
+  },
+  "extra_red_planet": {
+    "id": 9869383464,
+    "name": "Planet Texture",
+    "creator": "2012Planetboy",
+    "created": "2022-06-10",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Red planet.",
+    "alternates": [
+      135738566399127,
+      15498179438
+    ],
+    "wrap_seam_ratio": 1.33,
+    "alternates_info": {
+      "135738566399127": {
+        "name": "mars texture map",
+        "creator": "VipaulT",
+        "created": "2025-04-22"
+      },
+      "15498179438": {
+        "name": "Tyche",
+        "creator": "VipaulT",
+        "created": "2023-11-29"
+      }
+    }
+  },
+  "extra_ocean_planet": {
+    "id": 73942826163681,
+    "name": "IMG_7209",
+    "creator": "Afotts",
+    "created": "2026-10-10",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 380,
+    "aspect": 2.021,
+    "notes": "Dark-blue ocean planet with cloud swirls.",
+    "alternates": [
+      72910440879849,
+      8637877959
+    ],
+    "wrap_seam_ratio": 1.76,
+    "alternates_info": {
+      "72910440879849": {
+        "name": "[CUSTOM] Planet Map",
+        "creator": "lycus08",
+        "created": "2025-09-24"
+      },
+      "8637877959": {
+        "name": "Water Planet Texture",
+        "creator": "2012Planetboy",
+        "created": "2022-01-25"
+      }
+    }
+  },
+  "extra_sun_gold": {
+    "id": 133964586422832,
+    "name": "Sun texture map",
+    "creator": "VipaulT",
+    "created": "2025-05-13",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Pale gold/white star surface.",
+    "alternates": [
+      110358765314496,
+      98074418954058
+    ],
+    "wrap_seam_ratio": 1.26,
+    "alternates_info": {
+      "110358765314496": {
+        "name": "Untitled1608_20261028223440",
+        "creator": "EarthSolarSystem03",
+        "created": "2026-10-29"
+      },
+      "98074418954058": {
+        "name": "The Sun Texture",
+        "creator": "jw82213",
+        "created": "2025-06-21"
+      }
+    }
+  },
+  "extra_sun_orange": {
+    "id": 13377030499,
+    "name": "Sun texture",
+    "creator": "Bingbongbam32",
+    "created": "2023-05-07",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Orange star surface.",
+    "alternates": [
+      11853388875,
+      13593549569
+    ],
+    "wrap_seam_ratio": 0.89,
+    "alternates_info": {
+      "11853388875": {
+        "name": "sun map",
+        "creator": "Xx_Maximilian2020xX",
+        "created": "2022-12-18"
+      },
+      "13593549569": {
+        "name": "Sun Surface Full Texture",
+        "creator": "Janzy593",
+        "created": "2023-05-29"
+      }
+    }
+  },
+  "extra_clouds_alpha": {
+    "id": 11025160997,
+    "name": "planet cloud texture",
+    "creator": "HappyBirthdayHolland",
+    "created": "2022-09-24",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Cloud layer with transparency.",
+    "alternates": [
+      9398327434,
+      8634477231
+    ],
+    "wrap_seam_ratio": 1.24,
+    "alternates_info": {
+      "9398327434": {
+        "name": "Planet Clouds Texture PNG",
+        "creator": "2012Planetboy",
+        "created": "2022-04-17"
+      },
+      "8634477231": {
+        "name": "Earth's Clouds Texture & PNG",
+        "creator": "2012Planetboy",
+        "created": "2022-01-25"
+      }
+    }
+  },
+  "extra_gas_giant_grey": {
+    "id": 14167217029,
+    "name": "custom gas giant/brown dwarf texture",
+    "creator": "nasolovescookies",
+    "created": "2023-07-23",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Greyscale gas giant bands (tint with Color3).",
+    "alternates": [
+      119644870731646,
+      100279026534655
+    ],
+    "wrap_seam_ratio": 1.24,
+    "alternates_info": {
+      "119644870731646": {
+        "name": "Gas Giant texture",
+        "creator": "lucaacojocaru1",
+        "created": "2024-11-09"
+      },
+      "100279026534655": {
+        "name": "Gas Giant Template Texture",
+        "creator": "dqMint",
+        "created": "2025-01-24"
+      }
+    }
+  },
+  "extra_pink_gas_giant": {
+    "id": 14113890780,
+    "name": "GJ_504_b",
+    "creator": "VipaulT",
+    "created": "2023-07-19",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 768,
+    "preview_height": 384,
+    "aspect": 2.0,
+    "notes": "Magenta/pink gas giant.",
+    "alternates": [
+      78618957494449
+    ],
+    "wrap_seam_ratio": 0.29,
+    "alternates_info": {
+      "78618957494449": {
+        "name": "Many Banded Pink Gas Giant",
+        "creator": "ViewyPanic946",
+        "created": "2024-08-25"
+      }
+    }
+  },
+  "ring_saturn": {
+    "id": 5450454604,
+    "name": "Saturn's Rings",
+    "creator": "Volgenian",
+    "created": "2020-07-28",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Beige Saturn rings, top-down, transparent.",
+    "alternates": [
+      12267587041,
+      131443606326451
+    ],
+    "transparent_fraction": 0.622,
+    "alternates_info": {
+      "12267587041": {
+        "name": "Saturn's Rings",
+        "creator": "someltame_99",
+        "created": "2023-01-25"
+      },
+      "131443606326451": {
+        "name": "saturn_rings_texture_12k__by_kirbytron5919amm_dixu",
+        "creator": "kzombie34",
+        "created": "2026-09-29"
+      }
+    }
+  },
+  "ring_white": {
+    "id": 127544228287826,
+    "name": "planet rings",
+    "creator": "Reapeeey",
+    "created": "2025-08-18",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "White bold rings (tintable).",
+    "alternates": [
+      77996227679613,
+      129955661085080
+    ],
+    "transparent_fraction": 0.687,
+    "alternates_info": {
+      "77996227679613": {
+        "name": "Без названия252_20251013130240",
+        "creator": "Reapeeey",
+        "created": "2025-10-13"
+      },
+      "129955661085080": {
+        "name": "planet rings",
+        "creator": "Reapeeey",
+        "created": "2025-08-18"
+      }
+    }
+  },
+  "ring_thin": {
+    "id": 97275863438704,
+    "name": "planet rings",
+    "creator": "Reapeeey",
+    "created": "2025-08-18",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "White thin multi-rings (tintable).",
+    "alternates": [
+      91641769980871
+    ],
+    "transparent_fraction": 0.834,
+    "alternates_info": {
+      "91641769980871": {
+        "name": "Без названия251_20251013122417",
+        "creator": "Reapeeey",
+        "created": "2025-10-13"
+      }
+    }
+  },
+  "glow_soft": {
+    "id": 290434402,
+    "name": "CircleGradiant",
+    "creator": "Crykee",
+    "created": "2015-08-28",
+    "asset_type_id": 1,
+    "width": 1024,
+    "height": 1024,
+    "alpha": true,
+    "verification": "full-download (PNG/JPEG bytes inspected)",
+    "preview_width": 1024,
+    "preview_height": 1024,
+    "aspect": 1.0,
+    "notes": "White radial glow fading to transparent. Has a large solid white core with a soft falloff; for a pure centre-to-edge gradient use alternate 11999950713 or 12820082481.",
+    "alternates": [
+      12820082481,
+      11999950713,
+      8119252523
+    ],
+    "format": "png",
+    "transparent_fraction": 0.633,
+    "alternates_info": {
+      "12820082481": {
+        "name": "Soft Glow",
+        "creator": "GunsForGuns34",
+        "created": "2023-03-18"
+      },
+      "11999950713": {
+        "name": "Radial Gradient (outward)",
+        "creator": "superiortolol",
+        "created": "2023-01-01"
+      },
+      "8119252523": {
+        "name": "Images/White Radial Circle",
+        "creator": "mothmage",
+        "created": "2021-11-27"
+      }
+    }
+  },
+  "atmosphere_rim": {
+    "id": 12914395250,
+    "name": "circle with inwards gradient",
+    "creator": "MooMooManager",
+    "created": "2023-03-27",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Ring glow with transparent centre (atmosphere halo behind a planet).",
+    "alternates": [],
+    "transparent_fraction": 0.789,
+    "alternates_info": {}
+  },
+  "star_flare": {
+    "id": 15049808173,
+    "name": "lens flare",
+    "creator": "TutCoderPlayz",
+    "created": "2023-10-13",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "4-point star flare.",
+    "alternates": [
+      107821377391839,
+      9019634467,
+      112882057182762
+    ],
+    "transparent_fraction": 0.868,
+    "alternates_info": {
+      "107821377391839": {
+        "name": "Small Sparkle Effect",
+        "creator": "00000919708971019618",
+        "created": "2026-03-29"
+      },
+      "9019634467": {
+        "name": "Images/star_06 (1)",
+        "creator": "yuefanglor",
+        "created": "2022-03-05"
+      },
+      "112882057182762": {
+        "name": "star particle",
+        "creator": "ShazTheAmazingest",
+        "created": "2025-06-29"
+      }
+    }
+  },
+  "lens_flare": {
+    "id": 132488329559521,
+    "name": "lens-flare-light-effect",
+    "creator": "bringingthemhome",
+    "created": "2025-09-23",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Horizontal lens flare.",
+    "alternates": [
+      100159858152167
+    ],
+    "transparent_fraction": 0.954,
+    "alternates_info": {
+      "100159858152167": {
+        "name": "white lens flare 1",
+        "creator": "aloofst",
+        "created": "2025-06-07"
+      }
+    }
+  },
+  "smoke_cloud": {
+    "id": 6835347835,
+    "name": "Images/Sprite-FogBankCloud-Thick",
+    "creator": "RBLXImagineer",
+    "created": "2021-05-19",
+    "asset_type_id": 1,
+    "width": 1024,
+    "height": 1024,
+    "alpha": true,
+    "verification": "full-download (PNG/JPEG bytes inspected)",
+    "preview_width": 1024,
+    "preview_height": 1024,
+    "aspect": 1.0,
+    "notes": "Soft white cloud puff (tintable nebula/smoke).",
+    "alternates": [
+      5611867493,
+      8779210242,
+      7279469569
+    ],
+    "format": "png",
+    "transparent_fraction": 0.761,
+    "alternates_info": {
+      "5611867493": {
+        "name": "Soft Smoke Particle",
+        "creator": "PuffoThePufferfish",
+        "created": "2020-08-25"
+      },
+      "8779210242": {
+        "name": "Smoke_Particle",
+        "creator": "PixelatedP",
+        "created": "2022-02-09"
+      },
+      "7279469569": {
+        "name": "Images/SmokeWisp",
+        "creator": "RBLXImagineer",
+        "created": "2021-08-18"
+      }
+    }
+  },
+  "nebula_cloud_color": {
+    "id": 14135223682,
+    "name": "dadada",
+    "creator": "zaxxxx2145",
+    "created": "2023-07-20",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Colourful pink/blue nebula sprite.",
+    "alternates": [
+      15912352592
+    ],
+    "transparent_fraction": 0.65,
+    "alternates_info": {
+      "15912352592": {
+        "name": "Cosmic aura",
+        "creator": "maks223989",
+        "created": "2024-01-07"
+      }
+    }
+  },
+  "spark_round": {
+    "id": 139058028513030,
+    "name": "Circle particle",
+    "creator": "eliasf05",
+    "created": "2026-08-30",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Small round soft spark. It is a large soft disc; scale it down in the emitter. glow_soft (290434402) also works as a round spark and is the safer id.",
+    "alternates": [
+      290434402
+    ],
+    "transparent_fraction": 0.542,
+    "alternates_info": {
+      "290434402": {
+        "name": "CircleGradiant",
+        "creator": "Crykee",
+        "created": "2015-08-28"
+      }
+    }
+  },
+  "shockwave_ring": {
+    "id": 112096280571499,
+    "name": "Shockwave circle particle",
+    "creator": "Chaotic loom",
+    "created": "2025-09-05",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Thin shockwave ring.",
+    "alternates": [
+      131798398170799
+    ],
+    "transparent_fraction": 0.933,
+    "alternates_info": {
+      "131798398170799": {
+        "name": "Light Circle Particle",
+        "creator": "thefogiscoming769",
+        "created": "2025-09-01"
+      }
+    }
+  },
+  "accretion_disk": {
+    "id": 74443382753022,
+    "name": "Без названия112_20250923222013",
+    "creator": "Reapeeey",
+    "created": "2025-09-23",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "White/grey top-down swirl disc with hole (tintable).",
+    "alternates": [
+      13923772591,
+      17353947183
+    ],
+    "transparent_fraction": 0.586,
+    "alternates_info": {
+      "13923772591": {
+        "name": "accretion disk for public",
+        "creator": "ALEXANDERKINGISCOOL",
+        "created": "2023-07-01"
+      },
+      "17353947183": {
+        "name": "black hole accretion disk",
+        "creator": "VipaulT",
+        "created": "2024-05-01"
+      }
+    }
+  },
+  "galaxy_sprite": {
+    "id": 125791123364516,
+    "name": "444C6B55-FE2E-44FD-BE65-3E5DC2945B15",
+    "creator": "lMurderzl",
+    "created": "2025-01-05",
+    "asset_type_id": 1,
+    "width": null,
+    "height": null,
+    "alpha": true,
+    "verification": "thumbnail-only (asset download needs auth; inspected Roblox-rendered thumbnail, aspect preserved)",
+    "preview_width": 700,
+    "preview_height": 700,
+    "aspect": 1.0,
+    "notes": "Purple spiral galaxy sprite.",
+    "alternates": [
+      8090550308
+    ],
+    "transparent_fraction": 0.626,
+    "alternates_info": {
+      "8090550308": {
+        "name": "Spiral Galaxy",
+        "creator": "Blocko_hole",
+        "created": "2021-11-24"
+      }
+    }
+  },
+  "skybox_hub": {
+    "Bk": 95984003307249,
+    "Dn": 135816775316034,
+    "Ft": 134724161702610,
+    "Lf": 96690603990248,
+    "Rt": 129021469699942,
+    "Up": 90271986476549,
+    "name": "this should work",
+    "creator": "SniperMyBeloved",
+    "created": "2025-10-06",
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (700x700 thumbnails of all 6 faces inspected). Cube-edge continuity measured: mean edge colour difference with this assignment = ring 1.76 / Up 1.23 / Dn 2.08 (0-255 scale; mismatched assignments score 17.1+).",
+    "uploader_face_names": {
+      "Ft": "this should work.right",
+      "Lf": "this should work.back",
+      "Bk": "this should work.left",
+      "Rt": "this should work.front",
+      "Up": "this should work.up",
+      "Dn": "this should work.down"
+    },
+    "source_decal_ids": {
+      "Ft": 121388607744090,
+      "Lf": 109256014293709,
+      "Bk": 126467127438622,
+      "Rt": 125491169804135,
+      "Up": 84333535854830,
+      "Dn": 78370985104897
+    },
+    "notes": "Blue-violet nebula with pink/purple cloud core, blue wisps and dense star field. Hub pick. FACE ASSIGNMENT: the ids are already mapped to Roblox Sky properties so that the cube is seamless in Roblox - this is NOT the uploader's naming. Roblox's own classic skies (8 Roblox-owned Sky models checked by edge matching) use: turning right from SkyboxFt you see SkyboxLf, then Bk, then Rt; SkyboxUp's right edge joins Ft's top edge; SkyboxDn's right edge joins Ft's bottom edge. The uploader named faces in the ordinary cross layout (front/right/back/left), so the seamless mapping is Ft=their \"right\", Lf=their \"back\", Bk=their \"left\", Rt=their \"front\", Up=their \"top\", Dn=their \"bottom\". Assigning by name (front->Ft, left->Lf ...) would show seams on every edge. Set Sky.CelestialBodiesShown=false and StarCount=0 if the built-in stars/sun clash.",
+    "alternates": []
+  },
+  "skybox_alt": {
+    "Bk": 11992974790,
+    "Dn": 11992930263,
+    "Ft": 11992967051,
+    "Lf": 11992958367,
+    "Rt": 11992952074,
+    "Up": 11992917719,
+    "name": "Henry's Nebula Skybox",
+    "creator": "savemarc1",
+    "created": "2023-01-01",
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (700x700 thumbnails of all 6 faces inspected). Cube-edge continuity measured: mean edge colour difference with this assignment = ring 1.09 / Up 1.03 / Dn 1.18 (0-255 scale; mismatched assignments score 5.9+).",
+    "uploader_face_names": {
+      "Ft": "Henry's Nebula Skybox (right)",
+      "Lf": "Henry's Nebula Skybox (back)",
+      "Bk": "Henry's Nebula Skybox (left)",
+      "Rt": "Henry's Nebula Skybox (front)",
+      "Up": "Henry's Nebula Skybox (top)",
+      "Dn": "Henry's Nebula Skybox (bottom)"
+    },
+    "source_decal_ids": {
+      "Ft": 11992967092,
+      "Lf": 11992958391,
+      "Bk": 11992974817,
+      "Rt": 11992952107,
+      "Up": 11992917748,
+      "Dn": 11992930300
+    },
+    "notes": "Darker magenta/purple nebula on near-black, faint stars. Alternative / deep-space zones. FACE ASSIGNMENT: the ids are already mapped to Roblox Sky properties so that the cube is seamless in Roblox - this is NOT the uploader's naming. Roblox's own classic skies (8 Roblox-owned Sky models checked by edge matching) use: turning right from SkyboxFt you see SkyboxLf, then Bk, then Rt; SkyboxUp's right edge joins Ft's top edge; SkyboxDn's right edge joins Ft's bottom edge. The uploader named faces in the ordinary cross layout (front/right/back/left), so the seamless mapping is Ft=their \"right\", Lf=their \"back\", Bk=their \"left\", Rt=their \"front\", Up=their \"top\", Dn=their \"bottom\". Assigning by name (front->Ft, left->Lf ...) would show seams on every edge. Set Sky.CelestialBodiesShown=false and StarCount=0 if the built-in stars/sun clash.",
+    "alternates": []
+  },
+  "skybox_dark": {
+    "Bk": 11958661997,
+    "Dn": 11958617358,
+    "Ft": 11958652099,
+    "Lf": 11958639020,
+    "Rt": 11958629421,
+    "Up": 11958607760,
+    "name": "Titans Nebula Skybox",
+    "creator": "savemarc1",
+    "created": "2022-12-29",
+    "width": null,
+    "height": null,
+    "alpha": false,
+    "verification": "thumbnail-only (700x700 thumbnails of all 6 faces inspected). Cube-edge continuity measured: mean edge colour difference with this assignment = ring 0.98 / Up 0.97 / Dn 1.04 (0-255 scale; mismatched assignments score 8.6+).",
+    "uploader_face_names": {
+      "Ft": "Titans Nebula Skybox (right)",
+      "Lf": "Titans Nebula Skybox (back)",
+      "Bk": "Titans Nebula Skybox (left)",
+      "Rt": "Titans Nebula Skybox (front)",
+      "Up": "Titans Nebula Skybox (top)",
+      "Dn": "Titans Nebula Skybox (bottom)"
+    },
+    "source_decal_ids": {
+      "Ft": 11958652130,
+      "Lf": 11958639043,
+      "Bk": 11958662039,
+      "Rt": 11958629446,
+      "Up": 11958607818,
+      "Dn": 11958617396
+    },
+    "notes": "Very dark violet nebula, almost black; good when planets must pop. FACE ASSIGNMENT: the ids are already mapped to Roblox Sky properties so that the cube is seamless in Roblox - this is NOT the uploader's naming. Roblox's own classic skies (8 Roblox-owned Sky models checked by edge matching) use: turning right from SkyboxFt you see SkyboxLf, then Bk, then Rt; SkyboxUp's right edge joins Ft's top edge; SkyboxDn's right edge joins Ft's bottom edge. The uploader named faces in the ordinary cross layout (front/right/back/left), so the seamless mapping is Ft=their \"right\", Lf=their \"back\", Bk=their \"left\", Rt=their \"front\", Up=their \"top\", Dn=their \"bottom\". Assigning by name (front->Ft, left->Lf ...) would show seams on every edge. Set Sky.CelestialBodiesShown=false and StarCount=0 if the built-in stars/sun clash.",
+    "alternates": []
+  },
+  "sound_music_ambient_1": {
+    "id": 15675069601,
+    "name": "Roblox_UI_Loop_Calm_Music",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 95.48,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Mallet_percussion",
+      "Marimba_xylophone",
+      "Glockenspiel",
+      "Vibraphone",
+      "Chime",
+      "Singing_bowl",
+      "Ambient_music",
+      "New-age_music"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Calm looping ambient bed (mallets/chimes/singing-bowl, new-age). Best calm loop owned by Roblox; not specifically \"space\".",
+    "alternates": [],
+    "alternates_info": {}
+  },
+  "sound_music_ambient_2": {
+    "id": 130053244401794,
+    "name": "TutorialMusic_01",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 261.84,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Long music track (4m22s). Mood unknown (no auto-tags) - WEAK, listen before using. Alternate 162670130 \"UFO Beam\" is a 17 s sci-fi drone that can loop as ambience.",
+    "alternates": [
+      162670130
+    ],
+    "alternates_info": {
+      "162670130": {
+        "name": "UFO Beam",
+        "duration_seconds": 16.74
+      }
+    }
+  },
+  "sound_click": {
+    "id": 15675059323,
+    "name": "Roblox_UI_Bright_Click",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 0.37,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Dial_tone",
+      "Drip",
+      "Plop",
+      "Silence"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Bright UI click.",
+    "alternates": [
+      15675032796,
+      17208396156,
+      10066968815
+    ],
+    "alternates_info": {
+      "15675032796": {
+        "name": "Roblox_UI_Small_Click",
+        "duration_seconds": 0.13
+      },
+      "17208396156": {
+        "name": "Roblox GUI - Select",
+        "duration_seconds": 0.53
+      },
+      "10066968815": {
+        "name": "RBLX UI Select 02 (SFX)",
+        "duration_seconds": 0.49
+      }
+    }
+  },
+  "sound_hover": {
+    "id": 10066931761,
+    "name": "RBLX UI Hover 01 (SFX)",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 0.2,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Silence",
+      "Sidetone"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Very short UI hover tick.",
+    "alternates": [
+      17208339919,
+      10066936758
+    ],
+    "alternates_info": {
+      "17208339919": {
+        "name": "Roblox GUI - Hover 01",
+        "duration_seconds": 0.1
+      },
+      "10066936758": {
+        "name": "RBLX UI Hover 02 (SFX)",
+        "duration_seconds": 0.1
+      }
+    }
+  },
+  "sound_success": {
+    "id": 10066947742,
+    "name": "RBLX UI Purchase (SFX)",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 0.87,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Coin_(dropping)",
+      "Crack",
+      "Chink_clink",
+      "Ding",
+      "Clang",
+      "Jingle_tinkle",
+      "Silence"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Purchase/success chime (coin + ding).",
+    "alternates": [
+      17208380755,
+      99366249808641
+    ],
+    "alternates_info": {
+      "17208380755": {
+        "name": "Roblox GUI - Purchase",
+        "duration_seconds": 0.87
+      },
+      "99366249808641": {
+        "name": "TutorialPurchase_01",
+        "duration_seconds": 0.87
+      }
+    }
+  },
+  "sound_error": {
+    "id": 17208353912,
+    "name": "Roblox GUI - Negative",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 0.38,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 96000,
+    "auto_tags": [
+      "Dial_tone",
+      "Drip",
+      "Plop",
+      "Silence",
+      "Chirp_tone",
+      "Sidetone"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Short negative UI blip. Alternate is a crunchy delete sound.",
+    "alternates": [
+      15675075163
+    ],
+    "alternates_info": {
+      "15675075163": {
+        "name": "Roblox_UI_Delete",
+        "duration_seconds": 0.61
+      }
+    }
+  },
+  "sound_charge": {
+    "id": 16480578036,
+    "name": "Audio/Roblox_Pinball_8Bit_Riser_02",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 2.67,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Synthesizer",
+      "Video_game_music",
+      "Squeak",
+      "Scrape",
+      "Sound_effect",
+      "Cacophony"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Synth riser ~2.7 s for capsule charge-up (8-bit flavour). Alternate 15675021174 is a 10.6 s loop of air whooshes.",
+    "alternates": [
+      16480577565,
+      16480578169,
+      15675021174
+    ],
+    "alternates_info": {
+      "16480577565": {
+        "name": "Audio/Roblox_Pinball_8Bit_Riser_04",
+        "duration_seconds": 2.92
+      },
+      "16480578169": {
+        "name": "Audio/Roblox_Pinball_8Bit_Riser_01",
+        "duration_seconds": 2.12
+      },
+      "15675021174": {
+        "name": "Roblox_UI_Loop_Air_Whooshes",
+        "duration_seconds": 10.6
+      }
+    }
+  },
+  "sound_reveal": {
+    "id": 17208327798,
+    "name": "Roblox GUI - Aura",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 2.17,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 96000,
+    "auto_tags": [
+      "Ambient_music",
+      "New-age_music",
+      "Ding-dong",
+      "Ringtone",
+      "Sonar",
+      "Silence",
+      "Sidetone"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Shimmery ambient \"aura\" ding ~2.2 s for the reward reveal. No true fanfare exists in the Roblox-owned set; alternates: tonal stinger, jingle, classic victory.wav.",
+    "alternates": [
+      15675043410,
+      15675085146,
+      12222253
+    ],
+    "alternates_info": {
+      "15675043410": {
+        "name": "Roblox_UI_Tonal_Stinger",
+        "duration_seconds": 1.47
+      },
+      "15675085146": {
+        "name": "Roblox_UI_Indicator",
+        "duration_seconds": 3.37
+      },
+      "12222253": {
+        "name": "victory.wav",
+        "duration_seconds": 1.21
+      }
+    }
+  },
+  "sound_teleport": {
+    "id": 15674975792,
+    "name": "Roblox_UI_Whoosh_03",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 1.1,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 48000,
+    "auto_tags": [
+      "Sigh",
+      "Whoosh_swoosh_swish",
+      "Whip",
+      "Sound_effect"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Whoosh ~1.1 s for portal/teleport. Alternate 12222095 is a 6 s rocket whoosh.",
+    "alternates": [
+      15675024286,
+      15675028888,
+      12222095
+    ],
+    "alternates_info": {
+      "15675024286": {
+        "name": "Roblox_UI_Whoosh_01",
+        "duration_seconds": 0.85
+      },
+      "15675028888": {
+        "name": "Roblox_UI_Whoosh_02",
+        "duration_seconds": 0.49
+      },
+      "12222095": {
+        "name": "Rocket whoosh 01.wav",
+        "duration_seconds": 6.18
+      }
+    }
+  },
+  "sound_collect": {
+    "id": 17208319162,
+    "name": "Roblox GUI - Pickup",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 0.9,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 96000,
+    "auto_tags": [
+      "Coin_(dropping)",
+      "Cash_register",
+      "Crack",
+      "Chink_clink",
+      "Breaking",
+      "Ding",
+      "Clang",
+      "Creak"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "Coin/pickup ding. Alternates: coin transfer, classic electronic ping, cute pop ping.",
+    "alternates": [
+      127645268874265,
+      12221990,
+      15675055424
+    ],
+    "alternates_info": {
+      "127645268874265": {
+        "name": "CoinTransfer_01",
+        "duration_seconds": 1.66
+      },
+      "12221990": {
+        "name": "electronicpingshort.wav",
+        "duration_seconds": 0.46
+      },
+      "15675055424": {
+        "name": "Roblox_UI_Cute_Pop",
+        "duration_seconds": 2.7
+      }
+    }
+  },
+  "sound_levelup": {
+    "id": 17208372272,
+    "name": "Roblox GUI - Notification Low",
+    "creator": "Roblox",
+    "creator_id": 1,
+    "asset_type_id": 3,
+    "duration_seconds": 3.04,
+    "format": "ogg-vorbis",
+    "channels": 2,
+    "sample_rate": 96000,
+    "auto_tags": [
+      "Synthesizer",
+      "Ambient_music",
+      "Ding-dong",
+      "Ringtone",
+      "Sonar",
+      "Silence",
+      "Harmonic",
+      "Chirp_tone"
+    ],
+    "verification": "full-download (OGG bytes inspected, duration from stream); NOT auditioned by ear - chosen from name + Roblox auto-tags",
+    "notes": "3 s synth/harmonic notification swell for level-up/ascension. Alternates: higher notification, jingle, riser.",
+    "alternates": [
+      17208361335,
+      15675085146,
+      16480577565
+    ],
+    "alternates_info": {
+      "17208361335": {
+        "name": "Roblox GUI - Notification High",
+        "duration_seconds": 1.52
+      },
+      "15675085146": {
+        "name": "Roblox_UI_Indicator",
+        "duration_seconds": 3.37
+      },
+      "16480577565": {
+        "name": "Audio/Roblox_Pinball_8Bit_Riser_04",
+        "duration_seconds": 2.92
+      }
+    }
+  }
+}

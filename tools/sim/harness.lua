@@ -173,7 +173,7 @@ end
 function SIM.click(button)
 	assert(SIM.typeof(button) == "Instance" and SIM.isA(rawget(button, "__class"), "GuiButton"), "SIM.click requiere GuiButton")
 	local input = { UserInputType = SIM.Enum.UserInputType.MouseButton1, UserInputState = SIM.Enum.UserInputState.End,
-		Position = SIM.D.Vector3.new(0, 0, 0), KeyCode = SIM.Enum.KeyCode.Unknown }
+		Position = SIM.D.Vector3.new(0, 0, 0), KeyCode = SIM.Enum.KeyCode.E }
 	SIM.fireIf(button, "MouseButton1Down", 0, 0)
 	SIM.fireIf(button, "MouseButton1Up", 0, 0)
 	SIM.fireIf(button, "MouseButton1Click")

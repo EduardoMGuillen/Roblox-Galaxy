@@ -207,7 +207,8 @@ end
 function Signal:Wait()
 	checkCtx(self)
 	if not coroutine.isyieldable() then error("Signal:Wait() fuera de una corrutina", 2) end
-	table.insert(self._waiters, coroutine.running())
+	local co = coroutine.running()
+	table.insert(self._waiters, co)
 	return coroutine.yield()
 end
 function Signal:_fire(...)
