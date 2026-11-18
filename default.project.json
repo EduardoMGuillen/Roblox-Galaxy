@@ -1,0 +1,36 @@
+{
+  "name": "PlanetCollector",
+  "tree": {
+    "$className": "DataModel",
+    "Workspace": {
+      "$className": "Workspace",
+      "$properties": { "StreamingEnabled": false }
+    },
+    "Lighting": {
+      "$className": "Lighting",
+      "$properties": { "Technology": "Future" }
+    },
+    "Players": {
+      "$className": "Players",
+      "$properties": { "CharacterAutoLoads": false }
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Shared": { "$path": "src/shared" }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Server": { "$path": "src/server" }
+    },
+    "ServerStorage": { "$className": "ServerStorage" },
+    "StarterGui": { "$className": "StarterGui" },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Client": { "$path": "src/client" }
+      }
+    },
+    "SoundService": { "$className": "SoundService" }
+  }
+}
