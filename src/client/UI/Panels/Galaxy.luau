@@ -37,22 +37,25 @@ return function(ctx, parent)
 			Kit.listLayout(info, 5, false)
 			if state == "unlocked" then
 				local found, total = Progression.discoveredInSystem(data, def.Id)
-				local _, setCollection = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Violet })
+				local barCollection, setCollection = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Violet })
+				barCollection.LayoutOrder = 1
 				setCollection(found / total, "Colección " .. found .. "/" .. total)
 				local placed = Progression.placedCount(data, def.Id)
 				local slots = data.Slots[def.Id] or 0
-				local _, setSlots = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Cyan })
+				local barSlots, setSlots = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Cyan })
+				barSlots.LayoutOrder = 2
 				setSlots(placed / Defs.Config.Economy.SlotsPerSystem, "Órbitas " .. placed .. "/" .. slots .. " (máx. 8)")
 				local breakdown = data._Production and data._Production.Systems[def.Id]
 				Kit.label(info, "⚡ " .. Format.rate(breakdown and breakdown.Total or 0) .. " antes de mejoras", { Size = UDim2.new(1, 0, 0, 18),
-					TextSize = 11, Color = C.TextDim, Font = F.Body })
+					TextSize = 11, Color = C.TextDim, Font = F.Body, Props = { LayoutOrder = 3 } })
 				local reward = def.Reward
 				Kit.label(info, (data.CollectionsClaimed[def.Id] and "✔ " or "🎁 ") .. "Colección completa: +" .. reward.Stardust .. " ✨ y +"
 					.. math.floor(reward.ProductionBonus * 100) .. "% producción", { Size = UDim2.new(1, 0, 0, 34), TextSize = 11, Wrap = true,
-					Color = data.CollectionsClaimed[def.Id] and C.Green or C.TextDim, Font = F.Body })
+					Color = data.CollectionsClaimed[def.Id] and C.Green or C.TextDim, Font = F.Body, Props = { LayoutOrder = 4 } })
 			else
 				for i, check in ipairs(checks) do
-					local _, set = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 16), Color = check.Ok and C.Green or C.Gold })
+					local bar, set = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 16), Color = check.Ok and C.Green or C.Gold })
+					bar.LayoutOrder = i * 2 - 1
 					set(check.Goal > 0 and check.Current / check.Goal or 0, (check.Ok and "✔ " or "") .. Format.number(check.Current) .. " / "
 						.. Format.number(check.Goal))
 					Kit.label(info, check.Text, { Size = UDim2.new(1, 0, 0, 28), TextSize = 10, Wrap = true, Color = check.Ok and C.Green or C.TextDim,

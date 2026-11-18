@@ -114,6 +114,7 @@ function PlanetVisual.build(planetId, variant, evolved, opts)
 		Name = "Body", Color = baseColor, Material = material(visual.Material), CanCollide = false, CanTouch = false, Parent = model,
 	})
 	if variant == "shiny" then body.Reflectance = 0.35 end
+	if visual.Emissive then body.Material = Enum.Material.Neon end
 	model.PrimaryPart = body
 
 	local parts = {}
@@ -125,7 +126,8 @@ function PlanetVisual.build(planetId, variant, evolved, opts)
 
 	if useMesh then
 		local surface = Build.decor({ Name = "Surface", Size = Vector3.new(1, 1, 1), CFrame = CFrame.identity, Color = baseColor })
-		if visual.Emissive and not lite then surface.Material = Enum.Material.Neon end
+		-- los mundos emisivos dejan ver el nucleo de neon a traves de una superficie semitransparente
+		if visual.Emissive then surface.Transparency = 0.3 end
 		if variant == "shiny" then surface.Reflectance = 0.3 end
 		if opts.Hologram then surface.Transparency = 0.12 end
 		sphereMesh(surface, radius, textureUrl, tint)

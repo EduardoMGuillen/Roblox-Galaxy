@@ -45,7 +45,7 @@ return function(ctx, parent)
 			if other ~= Players.LocalPlayer then
 				others = others + 1
 				local row = Kit.box(players, C.Row, 0.1, { Size = UDim2.new(1, -6, 0, 56), LayoutOrder = index, Name = "Player_" .. other.UserId }, 10)
-				Kit.label(row, "🧑‍🚀 " .. other.DisplayName, { Size = UDim2.new(1, -150, 1, 0), Position = UDim2.fromOffset(12, 0), TextSize = 15 })
+				Kit.label(row, "🚀 " .. other.DisplayName, { Size = UDim2.new(1, -150, 1, 0), Position = UDim2.fromOffset(12, 0), TextSize = 15 })
 				Kit.button(row, "Invitar", "primary", { Size = UDim2.fromOffset(120, 36), Position = UDim2.new(1, -130, 0, 10), TextSize = 13,
 					Props = { Name = "Invite" } }, function(button)
 					local result = ctx.UI.request("RequestTrade", other.UserId)

@@ -4,11 +4,11 @@ local Ascension = {}
 -- Cada hito combina el requisito del manual con una cantidad de Energy generada en la ascension
 -- actual (RunEnergy), para que entre ascensiones siempre haya una partida real.
 Ascension.Milestones = {
-	{ Requirements = { { Type = "PlanetsOwned", Count = 10 }, { Type = "RunEnergy", Amount = 25000 } }, Multiplier = 2, Cores = 3 },
-	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 1 }, { Type = "RunEnergy", Amount = 2500000 } }, Multiplier = 3, Cores = 5 },
-	{ Requirements = { { Type = "CollectionComplete", System = "solar" }, { Type = "RunEnergy", Amount = 100000000 } }, Multiplier = 5, Cores = 8 },
-	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 3 }, { Type = "RunEnergy", Amount = 5000000000 } }, Multiplier = 8, Cores = 12 },
-	{ Requirements = { { Type = "CollectionComplete", System = "nebula" }, { Type = "RunEnergy", Amount = 200000000000 } }, Multiplier = 12, Cores = 20 },
+	{ Requirements = { { Type = "PlanetsOwned", Count = 10 }, { Type = "RunEnergy", Amount = 500000 } }, Multiplier = 2, Cores = 3 },
+	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 1 }, { Type = "RunEnergy", Amount = 150000000 } }, Multiplier = 3, Cores = 5 },
+	{ Requirements = { { Type = "CollectionComplete", System = "solar" }, { Type = "RunEnergy", Amount = 10000000000 } }, Multiplier = 5, Cores = 8 },
+	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 3 }, { Type = "RunEnergy", Amount = 400000000000 } }, Multiplier = 8, Cores = 12 },
+	{ Requirements = { { Type = "CollectionComplete", System = "nebula" }, { Type = "RunEnergy", Amount = 20000000000000 } }, Multiplier = 12, Cores = 20 },
 }
 
 -- Datos del hito para pasar de `current` ascensiones a current + 1
@@ -21,7 +21,7 @@ function Ascension.next(current)
 	local extra = n - #Ascension.Milestones
 	return {
 		Index = n,
-		Requirements = { { Type = "RunEnergy", Amount = 1e13 * 10 ^ (extra - 1) } },
+		Requirements = { { Type = "RunEnergy", Amount = 4e14 * 20 ^ (extra - 1) } },
 		Multiplier = 12 + 5 * extra,
 		Cores = 20 + 5 * extra,
 	}

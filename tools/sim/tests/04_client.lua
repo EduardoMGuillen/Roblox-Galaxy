@@ -12,8 +12,8 @@ SIM.assertNoErrors("arranque del cliente")
 
 local gui = p.PlayerGui
 local hudGui = gui:FindFirstChild("MainHUD")
-local panels = gui:FindFirstChild("Panels")
-local overlay = gui:FindFirstChild("Overlay")
+local panels = gui:FindFirstChild("Panels") and gui.Panels.Root
+local overlay = gui:FindFirstChild("Overlay") and gui.Overlay.Root
 assert(hudGui and panels and overlay, "no se crearon las ScreenGui")
 local root = hudGui.Root
 

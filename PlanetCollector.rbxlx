@@ -169,7 +169,7 @@ Config.Economy = {
 	TickSeconds = 1,
 	SlotsPerSystem = 8,
 	InventoryBaseCapacity = 150,
-	SellValueSeconds = 45, -- vender un planeta devuelve N segundos de su produccion base x multiplicador de sistema
+	SellReturn = 0.15, -- retorno esperado al vender lo obtenido de una capsula (fraccion de su precio)
 	OfflineBaseCapHours = 2,
 	OfflineBaseRate = 0.5, -- fraccion de la produccion que se gana desconectado
 	OfflineMinSeconds = 60,
@@ -253,11 +253,11 @@ local Ascension = {}
 -- Cada hito combina el requisito del manual con una cantidad de Energy generada en la ascension
 -- actual (RunEnergy), para que entre ascensiones siempre haya una partida real.
 Ascension.Milestones = {
-	{ Requirements = { { Type = "PlanetsOwned", Count = 10 }, { Type = "RunEnergy", Amount = 25000 } }, Multiplier = 2, Cores = 3 },
-	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 1 }, { Type = "RunEnergy", Amount = 2500000 } }, Multiplier = 3, Cores = 5 },
-	{ Requirements = { { Type = "CollectionComplete", System = "solar" }, { Type = "RunEnergy", Amount = 100000000 } }, Multiplier = 5, Cores = 8 },
-	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 3 }, { Type = "RunEnergy", Amount = 5000000000 } }, Multiplier = 8, Cores = 12 },
-	{ Requirements = { { Type = "CollectionComplete", System = "nebula" }, { Type = "RunEnergy", Amount = 200000000000 } }, Multiplier = 12, Cores = 20 },
+	{ Requirements = { { Type = "PlanetsOwned", Count = 10 }, { Type = "RunEnergy", Amount = 500000 } }, Multiplier = 2, Cores = 3 },
+	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 1 }, { Type = "RunEnergy", Amount = 150000000 } }, Multiplier = 3, Cores = 5 },
+	{ Requirements = { { Type = "CollectionComplete", System = "solar" }, { Type = "RunEnergy", Amount = 10000000000 } }, Multiplier = 5, Cores = 8 },
+	{ Requirements = { { Type = "RarityOwned", Rarity = "legendary", Count = 3 }, { Type = "RunEnergy", Amount = 400000000000 } }, Multiplier = 8, Cores = 12 },
+	{ Requirements = { { Type = "CollectionComplete", System = "nebula" }, { Type = "RunEnergy", Amount = 20000000000000 } }, Multiplier = 12, Cores = 20 },
 }
 
 -- Datos del hito para pasar de `current` ascensiones a current + 1
@@ -270,7 +270,7 @@ function Ascension.next(current)
 	local extra = n - #Ascension.Milestones
 	return {
 		Index = n,
-		Requirements = { { Type = "RunEnergy", Amount = 1e13 * 10 ^ (extra - 1) } },
+		Requirements = { { Type = "RunEnergy", Amount = 4e14 * 20 ^ (extra - 1) } },
 		Multiplier = 12 + 5 * extra,
 		Cores = 20 + 5 * extra,
 	}
@@ -540,12 +540,12 @@ local LIST = {
 		Reward = { Stardust = 50, ProductionBonus = 0.05 },
 	},
 	{
-		Id = "nebula", Name = "Nebula System", Subtitle = "Primer sistema avanzado", Multiplier = 6,
+		Id = "nebula", Name = "Nebula System", Subtitle = "Primer sistema avanzado", Multiplier = 4,
 		Description = "Nebulosas azules y violetas, polvo estelar, cristales y lunas.",
 		Introduces = "Cápsula Nebula, cristales, lunas y sinergias de elementos.",
-		SlotCosts = slotCosts(20), FreeSlots = 3,
+		SlotCosts = slotCosts(15), FreeSlots = 3,
 		Unlock = {
-			{ Type = "Energy", Amount = 75000 },
+			{ Type = "Energy", Amount = 150000 },
 			{ Type = "Collection", System = "solar", Count = 4 },
 		},
 		Theme = { Star = rgb(190, 150, 255), StarGlow = rgb(150, 110, 255), Orbit = rgb(170, 120, 255),
@@ -553,12 +553,12 @@ local LIST = {
 		Reward = { Stardust = 120, ProductionBonus = 0.05 },
 	},
 	{
-		Id = "void", Name = "Void System", Subtitle = "Sistema oscuro", Multiplier = 40,
+		Id = "void", Name = "Void System", Subtitle = "Sistema oscuro", Multiplier = 20,
 		Description = "Negros azulados, púrpuras profundos y un núcleo de gravedad en lugar de estrella.",
 		Introduces = "Cápsula Galaxy, mundos oscuros, singularidades y combinaciones avanzadas.",
-		SlotCosts = slotCosts(600), FreeSlots = 3,
+		SlotCosts = slotCosts(300), FreeSlots = 3,
 		Unlock = {
-			{ Type = "Energy", Amount = 5000000 },
+			{ Type = "Energy", Amount = 30000000 },
 			{ Type = "Collection", System = "nebula", Count = 4 },
 			{ Type = "Placed", System = "nebula", Count = 5 },
 		},
@@ -568,14 +568,14 @@ local LIST = {
 		Reward = { Stardust = 250, ProductionBonus = 0.05 },
 	},
 	{
-		Id = "celestial", Name = "Celestial System", Subtitle = "Sistema de alta rareza", Multiplier = 300,
+		Id = "celestial", Name = "Celestial System", Subtitle = "Sistema de alta rareza", Multiplier = 100,
 		Description = "Arquitectura dorada, estrella blanca-dorada, anillos elegantes y atmósferas luminosas.",
 		Introduces = "Cápsula Cosmic, coleccionables dorados y efectos visuales premium.",
-		SlotCosts = slotCosts(20000), FreeSlots = 3,
+		SlotCosts = slotCosts(8000), FreeSlots = 3,
 		Unlock = {
-			{ Type = "Energy", Amount = 400000000 },
+			{ Type = "Energy", Amount = 3000000000 },
 			{ Type = "Collection", System = "void", Count = 4 },
-			{ Type = "Production", Amount = 150000 },
+			{ Type = "Production", Amount = 50000 },
 		},
 		Theme = { Star = rgb(255, 245, 215), StarGlow = rgb(255, 215, 120), Orbit = rgb(255, 215, 120),
 			Nebula = { rgb(200, 150, 60), rgb(120, 90, 170) }, Ambient = rgb(165, 150, 125), Accent = rgb(255, 210, 110),
@@ -583,12 +583,12 @@ local LIST = {
 		Reward = { Stardust = 500, ProductionBonus = 0.05 },
 	},
 	{
-		Id = "infinity", Name = "Infinity System", Subtitle = "Endgame", Multiplier = 2500,
+		Id = "infinity", Name = "Infinity System", Subtitle = "Endgame", Multiplier = 500,
 		Description = "Dimensiones superpuestas, portales múltiples y geometrías cósmicas imposibles pero legibles.",
 		Introduces = "Cápsula Infinity, secretos y objetivos finales.",
-		SlotCosts = slotCosts(800000), FreeSlots = 3,
+		SlotCosts = slotCosts(300000), FreeSlots = 3,
 		Unlock = {
-			{ Type = "Energy", Amount = 50000000000 },
+			{ Type = "Energy", Amount = 250000000000 },
 			{ Type = "Ascensions", Count = 3 },
 			{ Type = "Discoveries", Count = 18 },
 		},
@@ -963,13 +963,13 @@ local Rarities = {}
 Rarities.Order = { "common", "uncommon", "rare", "epic", "legendary", "mythic", "secret" }
 
 Rarities.ById = {
-	common = { Id = "common", Name = "Común", Order = 1, Color = Color3.fromRGB(120, 200, 255), Icon = "●", SellMult = 1 },
-	uncommon = { Id = "uncommon", Name = "Poco común", Order = 2, Color = Color3.fromRGB(110, 230, 120), Icon = "◆", SellMult = 1.5 },
-	rare = { Id = "rare", Name = "Raro", Order = 3, Color = Color3.fromRGB(70, 140, 255), Icon = "▲", SellMult = 2.5 },
-	epic = { Id = "epic", Name = "Épico", Order = 4, Color = Color3.fromRGB(190, 90, 255), Icon = "✦", SellMult = 5 },
-	legendary = { Id = "legendary", Name = "Legendario", Order = 5, Color = Color3.fromRGB(255, 190, 50), Icon = "★", SellMult = 12 },
-	mythic = { Id = "mythic", Name = "Mítico", Order = 6, Color = Color3.fromRGB(255, 80, 200), Icon = "✪", SellMult = 30 },
-	secret = { Id = "secret", Name = "Secreto", Order = 7, Color = Color3.fromRGB(255, 70, 70), Icon = "✸", SellMult = 80 },
+	common = { Id = "common", Name = "Común", Order = 1, Color = Color3.fromRGB(120, 200, 255), Icon = "⚪", SellMult = 1 },
+	uncommon = { Id = "uncommon", Name = "Poco común", Order = 2, Color = Color3.fromRGB(110, 230, 120), Icon = "🟢", SellMult = 1.5 },
+	rare = { Id = "rare", Name = "Raro", Order = 3, Color = Color3.fromRGB(70, 140, 255), Icon = "🔵", SellMult = 2.5 },
+	epic = { Id = "epic", Name = "Épico", Order = 4, Color = Color3.fromRGB(190, 90, 255), Icon = "🟣", SellMult = 5 },
+	legendary = { Id = "legendary", Name = "Legendario", Order = 5, Color = Color3.fromRGB(255, 190, 50), Icon = "⭐", SellMult = 12 },
+	mythic = { Id = "mythic", Name = "Mítico", Order = 6, Color = Color3.fromRGB(255, 80, 200), Icon = "💎", SellMult = 30 },
+	secret = { Id = "secret", Name = "Secreto", Order = 7, Color = Color3.fromRGB(255, 70, 70), Icon = "🔥", SellMult = 80 },
 }
 
 function Rarities.get(id)
@@ -1116,13 +1116,13 @@ Variants.Order = { "none", "shiny", "golden", "rainbow", "cosmic" }
 
 Variants.ById = {
 	none = { Id = "none", Name = "Normal", Chance = 0, Multiplier = 1, Color = Color3.fromRGB(200, 215, 235), Icon = "" },
-	shiny = { Id = "shiny", Name = "Shiny", Chance = 0.04, Multiplier = 1.5, Color = Color3.fromRGB(190, 240, 255), Icon = "✧",
+	shiny = { Id = "shiny", Name = "Shiny", Chance = 0.04, Multiplier = 1.5, Color = Color3.fromRGB(190, 240, 255), Icon = "✨",
 		Description = "Brillo especial y reflejo marcado." },
-	golden = { Id = "golden", Name = "Golden", Chance = 0.02, Multiplier = 2, Color = Color3.fromRGB(255, 205, 70), Icon = "❖",
+	golden = { Id = "golden", Name = "Golden", Chance = 0.02, Multiplier = 2, Color = Color3.fromRGB(255, 205, 70), Icon = "🟡",
 		Description = "Superficie dorada con partículas cálidas." },
-	rainbow = { Id = "rainbow", Name = "Rainbow", Chance = 0.005, Multiplier = 3.5, Color = Color3.fromRGB(255, 120, 220), Icon = "❋",
+	rainbow = { Id = "rainbow", Name = "Rainbow", Chance = 0.005, Multiplier = 3.5, Color = Color3.fromRGB(255, 120, 220), Icon = "🌈",
 		Description = "Iridiscencia multicolor de transición suave." },
-	cosmic = { Id = "cosmic", Name = "Cosmic", Chance = 0.001, Multiplier = 6, Color = Color3.fromRGB(150, 110, 255), Icon = "✺",
+	cosmic = { Id = "cosmic", Name = "Cosmic", Chance = 0.001, Multiplier = 6, Color = Color3.fromRGB(150, 110, 255), Icon = "🌌",
 		Description = "Textura galáctica con partículas cósmicas." },
 }
 
@@ -1307,6 +1307,7 @@ function PlanetVisual.build(planetId, variant, evolved, opts)
 		Name = "Body", Color = baseColor, Material = material(visual.Material), CanCollide = false, CanTouch = false, Parent = model,
 	})
 	if variant == "shiny" then body.Reflectance = 0.35 end
+	if visual.Emissive then body.Material = Enum.Material.Neon end
 	model.PrimaryPart = body
 
 	local parts = {}
@@ -1318,7 +1319,8 @@ function PlanetVisual.build(planetId, variant, evolved, opts)
 
 	if useMesh then
 		local surface = Build.decor({ Name = "Surface", Size = Vector3.new(1, 1, 1), CFrame = CFrame.identity, Color = baseColor })
-		if visual.Emissive and not lite then surface.Material = Enum.Material.Neon end
+		-- los mundos emisivos dejan ver el nucleo de neon a traves de una superficie semitransparente
+		if visual.Emissive then surface.Transparency = 0.3 end
 		if variant == "shiny" then surface.Reflectance = 0.3 end
 		if opts.Hologram then surface.Transparency = 0.12 end
 		sphereMesh(surface, radius, textureUrl, tint)
@@ -1947,11 +1949,35 @@ function Progression.nextSlotCost(profile, systemId)
 	return Galaxy.ById[systemId].SlotCosts[owned + 1]
 end
 
+-- Valor de venta base de cada planeta: una fraccion del precio de la capsula mas barata que lo
+-- contiene, repartida de forma que el retorno esperado de abrir una capsula y vender todo sea
+-- Config.Economy.SellReturn (15%) de su precio. Asi vender nunca es rentable frente a comprar.
+local sellBase = nil
+local function buildSellBase()
+	sellBase = {}
+	for _, capsule in ipairs(Defs.Capsules.List) do
+		local rarities = 0
+		for _ in pairs(capsule.Odds) do
+			rarities = rarities + 1
+		end
+		for rarityId, pct in pairs(capsule.Odds) do
+			local weight = math.min(8, (1 / rarities) / (pct / 100))
+			for _, planetId in ipairs(capsule.Pools[rarityId]) do
+				if sellBase[planetId] == nil then
+					sellBase[planetId] = capsule.Price * Config.Economy.SellReturn * weight
+				end
+			end
+		end
+	end
+end
+
 function Progression.sellValue(inst)
-	local def = Planets.ById[inst.Id]
-	local sysMult = Galaxy.ById[def.System].Multiplier
-	return math.floor(Progression.planetRate(inst) * Config.Economy.SellValueSeconds * math.sqrt(sysMult)
-		* Rarities.ById[def.Rarity].SellMult)
+	if not sellBase then buildSellBase() end
+	local value = sellBase[inst.Id] or 1
+	-- las variantes y la forma Prime valen algo mas, con tope para no crear bucles de dinero
+	value = value * math.min(3, Variants.get(inst.V).Multiplier)
+	if inst.E then value = value * 2 end
+	return math.max(1, math.floor(value))
 end
 
 function Progression.evolutionCost(def)
@@ -2925,7 +2951,8 @@ function DataService.load(player)
 	local locked = false
 	local loaded = nil
 	local isNew = false
-	local ok, err = retry(Config.Data.LoadRetries, function()
+	local attempts = RunService:IsStudio() and 2 or Config.Data.LoadRetries
+	local ok, err = retry(attempts, function()
 		locked = false
 		store:UpdateAsync(key(userId), function(old)
 			if old ~= nil and type(old) ~= "table" then
@@ -4969,8 +4996,8 @@ function Environment.apply()
 	Lighting.ClockTime = 0
 	Lighting.GeographicLatitude = 35
 	Lighting.Brightness = 1.6
-	Lighting.Ambient = Color3.fromRGB(86, 92, 130)
-	Lighting.OutdoorAmbient = Color3.fromRGB(96, 100, 150)
+	Lighting.Ambient = Color3.fromRGB(108, 114, 150)
+	Lighting.OutdoorAmbient = Color3.fromRGB(112, 116, 162)
 	Lighting.ColorShift_Top = Color3.fromRGB(120, 140, 255)
 	Lighting.ColorShift_Bottom = Color3.fromRGB(90, 60, 160)
 	Lighting.EnvironmentDiffuseScale = 0.45
@@ -6628,7 +6655,7 @@ local STEPS = {
 		Target = "Capsule" },
 	go_universe = { Text = "Paso 2 · ¡Ya tienes planetas! Viaja a tu universo personal con la tarjeta «Tu Universo» o por el Portal Room.",
 		Target = "UniverseCard" },
-	place_planet = { Text = "Paso 3 · Coloca un planeta: usa el panel ÓRBITAS de la derecha (＋ Colocar planeta) o toca un marcador verde.",
+	place_planet = { Text = "Paso 3 · Coloca un planeta: usa el panel ÓRBITAS de la derecha (+ Colocar planeta) o toca un marcador verde.",
 		Target = nil },
 	watch_production = { Text = "Paso 4 · Tu planeta ya produce Energy cada segundo. Mira el contador ⚡ arriba a la izquierda.",
 		Button = "Entendido", Ack = "watch_production" },
@@ -6699,6 +6726,9 @@ function Tutorial.init(context)
 		ctx.UI.request("SkipTutorial")
 	end)
 	ctx.State.on("Tutorial", refresh)
+	ctx.UI.onLayout(function(compact)
+		banner.Position = compact and UDim2.new(0.5, 0, 1, -96) or UDim2.new(0.5, 0, 1, -130)
+	end)
 	refresh()
 	-- latido del resaltado
 	local t = 0
@@ -6748,6 +6778,11 @@ local openListeners = {}
 
 UI.Hud = hud
 
+local screens = {} -- [contenedor] = ScreenGui
+
+-- Crea una ScreenGui con un marco raiz escalable. El UIScale vive en el marco (un GuiObject) y el
+-- marco mide 1/escala de la pantalla, asi que tras escalar ocupa exactamente toda la pantalla.
+-- Devuelve el marco raiz, que es donde se colocan los elementos.
 local function makeScreen(name, order, ignoreInset)
 	local gui = Instance.new("ScreenGui")
 	gui.Name = name
@@ -6755,22 +6790,126 @@ local function makeScreen(name, order, ignoreInset)
 	gui.IgnoreGuiInset = ignoreInset
 	gui.DisplayOrder = order
 	gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	local root = Instance.new("Frame")
+	root.Name = "Root"
+	root.BackgroundTransparency = 1
+	root.BorderSizePixel = 0
+	root.Size = UDim2.fromScale(1, 1)
+	root.Parent = gui
 	local scale = Instance.new("UIScale")
 	scale.Name = "ScreenScale"
-	scale.Parent = gui
+	scale.Parent = root
 	gui.Parent = playerGui
-	return gui
+	screens[root] = gui
+	return root
+end
+
+local compact = false
+local layoutListeners = {}
+
+-- Posiciones y tamaños del HUD: modo normal (escritorio/tablet) y compacto (moviles apaisados)
+local LAYOUTS = {
+	normal = {
+		Energy = { UDim2.fromOffset(16, 16), UDim2.fromOffset(270, 54) },
+		Rate = { UDim2.fromOffset(24, 76), UDim2.fromOffset(190, 34) },
+		Stardust = { UDim2.fromOffset(24, 116), UDim2.fromOffset(124, 30) },
+		Cores = { UDim2.fromOffset(154, 116), UDim2.fromOffset(110, 30) },
+		Rebirth = { UDim2.new(1, -16, 0, 16), UDim2.fromOffset(236, 54) },
+		Ascension = { UDim2.new(1, -16, 0, 78), UDim2.fromOffset(236, 36) },
+		TopButtons = { UDim2.new(1, -16, 0, 122), UDim2.fromOffset(236, 44), UDim2.fromOffset(114, 40) },
+		Left = { UDim2.new(0, 16, 0.5, 30), UDim2.fromOffset(104, 470), UDim2.fromOffset(104, 86), Vector2.new(0, 0.5), 34 },
+		UniverseCard = { UDim2.new(0, 16, 1, -16), UDim2.fromOffset(370, 96) },
+		Capsule = { UDim2.new(0.5, 0, 1, -16), UDim2.fromOffset(310, 100) },
+		Right = { UDim2.new(1, -16, 1, -16), UDim2.fromOffset(400, 104), UDim2.fromOffset(124, 104), Vector2.new(1, 1), 40 },
+		Event = { UDim2.new(0.5, 0, 0, 14), UDim2.fromOffset(400, 44) },
+		Visit = { UDim2.new(0.5, 0, 0, 64), UDim2.fromOffset(460, 34) },
+		Toasts = { UDim2.new(0.5, 0, 0, 108), UDim2.fromOffset(640, 400) },
+		CapsuleText = 27, RebirthText = 22,
+	},
+	compact = {
+		Energy = { UDim2.fromOffset(12, 6), UDim2.fromOffset(240, 46) },
+		Rate = { UDim2.fromOffset(12, 56), UDim2.fromOffset(130, 28) },
+		Stardust = { UDim2.fromOffset(146, 56), UDim2.fromOffset(106, 28) },
+		Cores = { UDim2.fromOffset(12, 88), UDim2.fromOffset(100, 26) },
+		Rebirth = { UDim2.new(1, -12, 0, 6), UDim2.fromOffset(190, 44) },
+		Ascension = { UDim2.new(1, -12, 0, 54), UDim2.fromOffset(190, 30) },
+		TopButtons = { UDim2.new(1, -12, 0, 88), UDim2.fromOffset(190, 36), UDim2.fromOffset(91, 34) },
+		Left = { UDim2.fromOffset(12, 122), UDim2.fromOffset(190, 200), UDim2.fromOffset(90, 60), Vector2.new(0, 0), 24 },
+		UniverseCard = { UDim2.new(0, 12, 1, -10), UDim2.fromOffset(290, 70) },
+		Capsule = { UDim2.new(0.5, 0, 1, -10), UDim2.fromOffset(250, 76) },
+		Right = { UDim2.new(1, -12, 1, -10), UDim2.fromOffset(310, 78), UDim2.fromOffset(96, 78), Vector2.new(1, 1), 30 },
+		Event = { UDim2.new(0.5, 0, 0, 6), UDim2.fromOffset(330, 36) },
+		Visit = { UDim2.new(0.5, 0, 0, 46), UDim2.fromOffset(400, 28) },
+		Toasts = { UDim2.new(0.5, 0, 0, 80), UDim2.fromOffset(640, 300) },
+		CapsuleText = 21, RebirthText = 18,
+	},
+}
+
+local function applyLayout()
+	local spec = compact and LAYOUTS.compact or LAYOUTS.normal
+	for _, name in ipairs({ "Energy", "Rate", "Stardust", "Cores", "Rebirth", "Ascension", "UniverseCard", "Capsule", "Event", "Visit", "Toasts" }) do
+		local item = hud.Items[name]
+		item.Position = spec[name][1]
+		item.Size = spec[name][2]
+	end
+	for _, name in ipairs({ "TopButtons", "Left", "Right" }) do
+		local item = hud.Items[name]
+		local grid = item:FindFirstChildOfClass("UIGridLayout")
+		item.Position = spec[name][1]
+		item.Size = spec[name][2]
+		grid.CellSize = spec[name][3]
+		if spec[name][4] then item.AnchorPoint = spec[name][4] end
+		if spec[name][5] then
+			for _, child in ipairs(item:GetChildren()) do
+				local icon = child:FindFirstChild("Icon")
+				if icon then icon.TextSize = spec[name][5] end
+			end
+		end
+	end
+	hud.CapsuleText.TextSize = spec.CapsuleText
+	hud.Rebirth.TextSize = spec.RebirthText
+	for _, fn in ipairs(layoutListeners) do
+		task.spawn(fn, compact)
+	end
+end
+
+function UI.isCompact()
+	return compact
+end
+
+-- fn(compact) se llama cada vez que cambia el modo de layout (y una vez al registrarse)
+function UI.onLayout(fn)
+	table.insert(layoutListeners, fn)
+	task.spawn(fn, compact)
+end
+
+local function setScale(root, value)
+	local scale = root:FindFirstChild("ScreenScale")
+	if scale then scale.Scale = value end
+	root.Size = UDim2.fromScale(1 / value, 1 / value)
 end
 
 local function updateScale()
 	local camera = Workspace.CurrentCamera
 	local size = camera and camera.ViewportSize or Vector2.new(1280, 720)
-	local s = math.clamp(math.min(size.Y / 900, size.X / 1500), 0.5, 1.35)
 	local large = State.Data.Settings and State.Data.Settings.LargeText
-	if large then s = s * 1.12 end
-	for _, gui in ipairs({ hudGui, panelGui, overlayGui }) do
-		local scale = gui:FindFirstChild("ScreenScale")
-		if scale then scale.Scale = s end
+	local boost = large and 1.12 or 1
+	local wasCompact = compact
+	compact = size.Y < 600
+	local hudScale
+	if compact then
+		hudScale = math.clamp(math.min(size.Y / 540, size.X / 1150), 0.5, 0.9)
+	else
+		hudScale = math.clamp(math.min(size.Y / 900, size.X / 1500), 0.6, 1.35)
+	end
+	-- los paneles (hasta 980x580) siempre deben caber en pantalla
+	local panelScale = math.clamp(math.min(size.X / 1010, size.Y / 610), 0.4, 1.35)
+	setScale(hudGui, hudScale * boost)
+	setScale(panelGui, panelScale)
+	setScale(overlayGui, panelScale)
+	if compact ~= wasCompact or not hud.LayoutApplied then
+		hud.LayoutApplied = true
+		applyLayout()
 	end
 end
 
@@ -6783,6 +6922,7 @@ function UI.context()
 end
 
 ---------------------------------------------------------------- avisos
+local toastCount = 0
 local TOAST_COLORS = { info = C.Cyan, error = C.Red, reward = C.Gold, secret = C.Magenta, event = C.Gold,
 	collection = C.Green, system = C.Violet }
 
@@ -6790,7 +6930,8 @@ function UI.toast(text, kind)
 	kind = kind or "info"
 	local color = TOAST_COLORS[kind] or C.Cyan
 	local big = kind == "secret" or kind == "collection" or kind == "system"
-	local box = Kit.box(toastHolder, C.Panel, 0.05, { Size = UDim2.fromOffset(big and 620 or 520, big and 58 or 44) }, 10)
+	toastCount = toastCount + 1
+	local box = Kit.box(toastHolder, C.Panel, 0.05, { Size = UDim2.fromOffset(big and 620 or 520, big and 58 or 44), LayoutOrder = toastCount }, 10)
 	Kit.stroke(box, color, 2, 0)
 	local label = Kit.label(box, text, { Size = UDim2.new(1, -24, 1, 0), Position = UDim2.fromOffset(12, 0), TextSize = big and 16 or 14,
 		AlignX = Enum.TextXAlignment.Center, Wrap = true, Color = big and color or C.Text })
@@ -6906,67 +7047,85 @@ local function pill(parent, size, position, anchor, strokeColor)
 	return box
 end
 
-local function squareButton(parent, icon, text, size, order, onClick)
-	local b = Kit.button(parent, "", "ghost", { Size = size, Props = { LayoutOrder = order } }, onClick)
-	Kit.label(b, icon, { Size = UDim2.new(1, 0, 0.58, 0), Position = UDim2.fromScale(0, 0.06), TextSize = math.floor(size.Y.Offset * 0.4),
+local function squareButton(parent, icon, text, order, onClick)
+	local b = Kit.button(parent, "", "ghost", { Props = { LayoutOrder = order } }, onClick)
+	Kit.label(b, icon, { Size = UDim2.new(1, 0, 0.58, 0), Position = UDim2.fromScale(0, 0.06), TextSize = 34,
 		AlignX = Enum.TextXAlignment.Center }).Name = "Icon"
 	Kit.label(b, text, { Size = UDim2.new(1, 0, 0.3, 0), Position = UDim2.fromScale(0, 0.64), TextSize = 13,
 		AlignX = Enum.TextXAlignment.Center, Stroke = true }).Name = "Caption"
 	return b
 end
 
+local function gridFrame(parent, name, padding, alignRight)
+	local frame = Kit.frame(parent, { Name = name })
+	local grid = Instance.new("UIGridLayout")
+	grid.CellPadding = UDim2.fromOffset(padding, padding)
+	grid.SortOrder = Enum.SortOrder.LayoutOrder
+	grid.HorizontalAlignment = alignRight and Enum.HorizontalAlignment.Right or Enum.HorizontalAlignment.Left
+	grid.Parent = frame
+	return frame
+end
+
 local function buildHud()
-	local root = Kit.frame(hudGui, { Name = "Root", Size = UDim2.fromScale(1, 1) })
+	local root = hudGui
 	hud.Root = root
+	local items = {}
+	hud.Items = items
 
 	-- superior izquierda: Energy, Energy/s y monedas secundarias
 	local energy = pill(root, UDim2.fromOffset(270, 54), UDim2.fromOffset(16, 16), nil, C.Energy)
 	energy.Name = "Energy"
-	Kit.label(energy, "⚡", { Size = UDim2.fromOffset(44, 54), Position = UDim2.fromOffset(8, 0), TextSize = 30, AlignX = Enum.TextXAlignment.Center })
-	hud.Energy = Kit.label(energy, "0", { Size = UDim2.new(1, -106, 1, 0), Position = UDim2.fromOffset(54, 0), TextSize = 27, Font = F.Black,
+	items.Energy = energy
+	Kit.label(energy, "⚡", { Size = UDim2.new(0, 44, 1, 0), Position = UDim2.fromOffset(8, 0), TextSize = 28, AlignX = Enum.TextXAlignment.Center })
+	hud.Energy = Kit.label(energy, "0", { Size = UDim2.new(1, -106, 1, 0), Position = UDim2.fromOffset(54, 0), TextSize = 26, Font = F.Black,
 		Stroke = true })
-	Kit.button(energy, "+", "cyan", { Size = UDim2.fromOffset(38, 38), Position = UDim2.new(1, -46, 0, 8), TextSize = 24 }, function()
+	Kit.button(energy, "+", "cyan", { Size = UDim2.fromOffset(36, 36), Position = UDim2.new(1, -44, 0.5, 0), AnchorPoint = Vector2.new(0, 0.5),
+		TextSize = 24 }, function()
 		UI.toggle("Stats")
 	end).Name = "Plus"
 	local rate = pill(root, UDim2.fromOffset(190, 34), UDim2.fromOffset(24, 76), nil, C.Cyan)
 	rate.Name = "Rate"
-	hud.Rate = Kit.label(rate, "0/s", { Size = UDim2.fromScale(1, 1), TextSize = 18, AlignX = Enum.TextXAlignment.Center, Color = C.Cyan })
+	items.Rate = rate
+	hud.Rate = Kit.label(rate, "0/s", { Size = UDim2.fromScale(1, 1), TextSize = 17, AlignX = Enum.TextXAlignment.Center, Color = C.Cyan })
 	local stardust = pill(root, UDim2.fromOffset(124, 30), UDim2.fromOffset(24, 116), nil, C.Stardust)
 	stardust.Name = "Stardust"
+	items.Stardust = stardust
 	hud.Stardust = Kit.label(stardust, "✨ 0", { Size = UDim2.fromScale(1, 1), TextSize = 14, AlignX = Enum.TextXAlignment.Center, Color = C.Stardust })
 	local cores = pill(root, UDim2.fromOffset(110, 30), UDim2.fromOffset(154, 116), nil, C.Cores)
 	cores.Name = "Cores"
+	items.Cores = cores
 	hud.Cores = Kit.label(cores, "💠 0", { Size = UDim2.fromScale(1, 1), TextSize = 14, AlignX = Enum.TextXAlignment.Center, Color = C.Cores })
 
 	-- superior derecha: ascension, estadisticas y clasificacion
-	hud.Rebirth = Kit.button(root, "♻  REBIRTH", "primary", { Size = UDim2.fromOffset(236, 54), Position = UDim2.new(1, -16, 0, 16),
+	hud.Rebirth = Kit.button(root, "🔄  REBIRTH", "primary", { Size = UDim2.fromOffset(236, 54), Position = UDim2.new(1, -16, 0, 16),
 		AnchorPoint = Vector2.new(1, 0), TextSize = 22, Font = F.Black }, function()
 		UI.toggle("Rebirth")
 	end)
 	hud.Rebirth.Name = "Rebirth"
+	items.Rebirth = hud.Rebirth
 	local asc = pill(root, UDim2.fromOffset(236, 36), UDim2.new(1, -16, 0, 78), Vector2.new(1, 0), C.Gold)
 	asc.Name = "Ascension"
-	hud.Ascension = Kit.label(asc, "👑 Ascensión: 0", { Size = UDim2.fromScale(1, 1), TextSize = 17, AlignX = Enum.TextXAlignment.Center, Color = C.Gold })
-	local topButtons = Kit.frame(root, { Name = "TopButtons", Size = UDim2.fromOffset(236, 44), Position = UDim2.new(1, -16, 0, 122),
-		AnchorPoint = Vector2.new(1, 0) })
-	Kit.listLayout(topButtons, 8, true)
-	Kit.button(topButtons, "📊 Estadísticas", "ghost", { Size = UDim2.fromOffset(114, 40), TextSize = 12, Props = { LayoutOrder = 1 } }, function()
+	items.Ascension = asc
+	hud.Ascension = Kit.label(asc, "👑 Ascensión: 0", { Size = UDim2.fromScale(1, 1), TextSize = 16, AlignX = Enum.TextXAlignment.Center, Color = C.Gold })
+	local topButtons = gridFrame(root, "TopButtons", 8, true)
+	topButtons.AnchorPoint = Vector2.new(1, 0)
+	items.TopButtons = topButtons
+	Kit.button(topButtons, "📊 Estadísticas", "ghost", { TextSize = 12, Props = { LayoutOrder = 1 } }, function()
 		UI.toggle("Stats")
 	end).Name = "Stats"
-	Kit.button(topButtons, "🏅 Ranking", "ghost", { Size = UDim2.fromOffset(114, 40), TextSize = 12, Props = { LayoutOrder = 2 } }, function()
+	Kit.button(topButtons, "🏅 Ranking", "ghost", { TextSize = 12, Props = { LayoutOrder = 2 } }, function()
 		UI.toggle("Leaderboard")
 	end).Name = "Leaderboard"
 
 	-- lateral izquierdo
-	local left = Kit.frame(root, { Name = "Left", Size = UDim2.fromOffset(104, 470), Position = UDim2.new(0, 16, 0.5, 30), AnchorPoint = Vector2.new(0, 0.5) })
-	Kit.listLayout(left, 8, false)
-	local leftSize = UDim2.fromOffset(104, 86)
-	squareButton(left, "🎒", "Inventario", leftSize, 1, function() UI.toggle("Inventory") end).Name = "Inventory"
-	squareButton(left, "📖", "Colección", leftSize, 2, function() UI.toggle("Collection") end).Name = "Collection"
-	hud.Missions = squareButton(left, "🏆", "Misiones", leftSize, 3, function() UI.toggle("Missions") end)
+	local left = gridFrame(root, "Left", 8, false)
+	items.Left = left
+	squareButton(left, "🎒", "Inventario", 1, function() UI.toggle("Inventory") end).Name = "Inventory"
+	squareButton(left, "📖", "Colección", 2, function() UI.toggle("Collection") end).Name = "Collection"
+	hud.Missions = squareButton(left, "🏆", "Misiones", 3, function() UI.toggle("Missions") end)
 	hud.Missions.Name = "Missions"
-	squareButton(left, "🔁", "Trading", leftSize, 4, function() UI.toggle("Trading") end).Name = "Trading"
-	squareButton(left, "⚙️", "Ajustes", leftSize, 5, function() UI.toggle("Settings") end).Name = "Settings"
+	squareButton(left, "🔁", "Trading", 4, function() UI.toggle("Trading") end).Name = "Trading"
+	squareButton(left, "⚙️", "Ajustes", 5, function() UI.toggle("Settings") end).Name = "Settings"
 	hud.MissionBadge = Kit.box(hud.Missions, C.Red, 0, { Size = UDim2.fromOffset(22, 22), Position = UDim2.new(1, -18, 0, -4), Visible = false }, 11)
 	hud.MissionBadgeText = Kit.label(hud.MissionBadge, "!", { Size = UDim2.fromScale(1, 1), TextSize = 13, AlignX = Enum.TextXAlignment.Center })
 
@@ -6983,13 +7142,14 @@ local function buildHud()
 		end
 	end)
 	hud.UniverseCard.Name = "UniverseCard"
-	Kit.label(hud.UniverseCard, "🌌", { Size = UDim2.fromOffset(84, 96), Position = UDim2.fromOffset(6, 0), TextSize = 50, AlignX = Enum.TextXAlignment.Center })
-	hud.UniverseTitle = Kit.label(hud.UniverseCard, "Tu Universo", { Size = UDim2.new(1, -150, 0, 26), Position = UDim2.fromOffset(96, 16),
-		TextSize = 15, Color = C.TextDim })
-	hud.UniverseName = Kit.label(hud.UniverseCard, "Solar System", { Size = UDim2.new(1, -150, 0, 34), Position = UDim2.fromOffset(96, 44),
-		TextSize = 23, Stroke = true })
-	Kit.label(hud.UniverseCard, "›", { Size = UDim2.fromOffset(40, 96), Position = UDim2.new(1, -46, 0, -4), TextSize = 50, Color = C.Cyan,
-		AlignX = Enum.TextXAlignment.Center })
+	items.UniverseCard = hud.UniverseCard
+	Kit.label(hud.UniverseCard, "🌌", { Size = UDim2.new(0, 76, 1, 0), Position = UDim2.fromOffset(6, 0), TextSize = 42, AlignX = Enum.TextXAlignment.Center })
+	hud.UniverseTitle = Kit.label(hud.UniverseCard, "Tu Universo", { Size = UDim2.new(1, -130, 0.34, 0), Position = UDim2.new(0, 88, 0.14, 0),
+		TextSize = 14, Color = C.TextDim })
+	hud.UniverseName = Kit.label(hud.UniverseCard, "Solar System", { Size = UDim2.new(1, -130, 0.4, 0), Position = UDim2.new(0, 88, 0.46, 0),
+		TextSize = 22, Stroke = true })
+	Kit.label(hud.UniverseCard, ">", { Size = UDim2.new(0, 36, 1, 0), Position = UDim2.new(1, -42, 0, 0), TextSize = 32, Color = C.Cyan,
+		AlignX = Enum.TextXAlignment.Center, Font = F.Black })
 
 	-- inferior centro: capsulas
 	hud.Capsule = Kit.button(root, "", "primary", { Size = UDim2.fromOffset(310, 100), Position = UDim2.new(0.5, 0, 1, -16),
@@ -6997,32 +7157,35 @@ local function buildHud()
 		UI.toggle("Capsules")
 	end)
 	hud.Capsule.Name = "OpenCapsule"
-	Kit.label(hud.Capsule, "💊", { Size = UDim2.fromOffset(90, 100), Position = UDim2.fromOffset(14, 0), TextSize = 52, AlignX = Enum.TextXAlignment.Center })
-	Kit.label(hud.Capsule, "OPEN\nCAPSULE", { Size = UDim2.new(1, -112, 1, 0), Position = UDim2.fromOffset(104, 0), TextSize = 27, Font = F.Black,
-		Stroke = true, Wrap = true, Props = { LineHeight = 1.05 } })
+	items.Capsule = hud.Capsule
+	Kit.label(hud.Capsule, "💊", { Size = UDim2.new(0.3, 0, 1, 0), Position = UDim2.fromScale(0.03, 0), TextSize = 44, AlignX = Enum.TextXAlignment.Center })
+	hud.CapsuleText = Kit.label(hud.Capsule, "OPEN\nCAPSULE", { Size = UDim2.new(0.64, 0, 1, 0), Position = UDim2.fromScale(0.34, 0), TextSize = 27,
+		Font = F.Black, Stroke = true, Wrap = true, Props = { LineHeight = 1.05 } })
 
 	-- inferior derecha: mejoras, teletransporte y tienda
-	local right = Kit.frame(root, { Name = "Right", Size = UDim2.fromOffset(400, 104), Position = UDim2.new(1, -16, 1, -16), AnchorPoint = Vector2.new(1, 1) })
-	local rightLayout = Kit.listLayout(right, 10, true)
-	rightLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-	local rightSize = UDim2.fromOffset(124, 104)
-	squareButton(right, "📈", "Mejoras", rightSize, 1, function() UI.toggle("Upgrades") end).Name = "Upgrades"
-	squareButton(right, "🌀", "Teleport", rightSize, 2, function() UI.toggle("Teleport") end).Name = "Teleport"
-	squareButton(right, "🛍️", "Tienda", rightSize, 3, function() UI.toggle("Shop") end).Name = "Shop"
+	local right = gridFrame(root, "Right", 8, true)
+	right.AnchorPoint = Vector2.new(1, 1)
+	items.Right = right
+	squareButton(right, "📈", "Mejoras", 1, function() UI.toggle("Upgrades") end).Name = "Upgrades"
+	squareButton(right, "🌀", "Teleport", 2, function() UI.toggle("Teleport") end).Name = "Teleport"
+	squareButton(right, "🛒", "Tienda", 3, function() UI.toggle("Shop") end).Name = "Shop"
 
 	-- superior centro: evento y aviso de visita
 	hud.Event = Kit.button(root, "", "ghost", { Size = UDim2.fromOffset(400, 44), Position = UDim2.new(0.5, 0, 0, 14),
-		AnchorPoint = Vector2.new(0.5, 0), TextSize = 15 }, function()
+		AnchorPoint = Vector2.new(0.5, 0), TextSize = 14 }, function()
 		UI.toggle("Event")
 	end)
 	hud.Event.Name = "EventChip"
+	items.Event = hud.Event
 	hud.Visit = pill(root, UDim2.fromOffset(460, 34), UDim2.new(0.5, 0, 0, 64), Vector2.new(0.5, 0), C.Violet)
 	hud.Visit.Name = "VisitBanner"
 	hud.Visit.Visible = false
-	hud.VisitText = Kit.label(hud.Visit, "", { Size = UDim2.fromScale(1, 1), TextSize = 14, AlignX = Enum.TextXAlignment.Center, Color = C.Stardust })
+	items.Visit = hud.Visit
+	hud.VisitText = Kit.label(hud.Visit, "", { Size = UDim2.fromScale(1, 1), TextSize = 13, AlignX = Enum.TextXAlignment.Center, Color = C.Stardust })
 
 	toastHolder = Kit.frame(overlayGui, { Name = "Toasts", Size = UDim2.fromOffset(640, 400), Position = UDim2.new(0.5, 0, 0, 108),
 		AnchorPoint = Vector2.new(0.5, 0) })
+	items.Toasts = toastHolder
 	local layout = Kit.listLayout(toastHolder, 6, false)
 	layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 end
@@ -7040,7 +7203,7 @@ local function refreshStatic()
 		hud.UniverseName.Text = system.Name
 		hud.Visit.Visible = false
 	elseif owner == player.UserId then
-		hud.UniverseTitle.Text = "Sistemas de tu universo"
+		hud.UniverseTitle.Text = "Tu universo · sistemas"
 		hud.UniverseName.Text = system.Name
 		hud.Visit.Visible = false
 	else
@@ -7048,7 +7211,7 @@ local function refreshStatic()
 		hud.UniverseTitle.Text = "Visitando a " .. (view and view.Name or "otro jugador")
 		hud.UniverseName.Text = "Volver al Hub"
 		hud.Visit.Visible = true
-		hud.VisitText.Text = "👁 Universo de " .. (view and view.Name or "?") .. " · modo solo lectura"
+		hud.VisitText.Text = "👀 Universo de " .. (view and view.Name or "?") .. " · modo solo lectura"
 	end
 	-- misiones reclamables
 	local claimable = 0
@@ -7090,7 +7253,7 @@ local function refreshEvent()
 end
 
 function UI.setHudVisible(visible)
-	hudGui.Enabled = visible
+	screens[hudGui].Enabled = visible
 end
 
 function UI.init(context)
@@ -7244,8 +7407,9 @@ local function buildStar(view, theme, folder, low)
 		local core = Build.ball({ Position = center, Radius = radius * 0.96 }, { Name = "Core", Color = theme.Star, Material = Enum.Material.Neon,
 			CanCollide = false, Parent = star })
 		if Assets.SphereMesh ~= 0 and Assets.texture("sun") ~= "" then
+			-- superficie texturizada semitransparente sobre el nucleo de neon (aspecto emisivo con detalle)
 			local surface = Build.decor({ Name = "Surface", Size = Vector3.new(1, 1, 1), CFrame = CFrame.new(center), Color = theme.Star,
-				Material = Enum.Material.Neon, Parent = star })
+				Transparency = 0.35, Parent = star })
 			local mesh = Instance.new("SpecialMesh")
 			mesh.MeshType = Enum.MeshType.FileMesh
 			mesh.MeshId = Assets.url(Assets.SphereMesh)
@@ -7475,7 +7639,7 @@ local function addMarker(slot, kind, view)
 	part:SetAttribute("Slot", slot)
 	part:SetAttribute("Kind", kind)
 	if kind == "empty" then
-		nameTag(part, "＋ Órbita " .. slot, "Colocar planeta", Color3.fromRGB(150, 255, 200), 5)
+		nameTag(part, "+ Órbita " .. slot, "Colocar planeta", Color3.fromRGB(150, 255, 200), 5)
 	else
 		local cost = Progression.nextSlotCost(ctx.State.Data, view.System) or 0
 		nameTag(part, "🔒 Órbita " .. slot, "⚡ " .. Format.number(cost), Color3.fromRGB(255, 215, 120), 5)
@@ -7598,20 +7762,41 @@ local function buildSlotsPanel()
 		Props = { Name = "CameraToggle" } }, function()
 		if ctx.Camera then ctx.Camera.toggleOverview() end
 	end)
-	slotsPanel = { Frame = panel, Title = title, List = list, CameraButton = cameraButton }
+	-- en moviles el panel se pliega tras un boton para no tapar el universo
+	local toggle = Kit.button(root, "🪐 Órbitas", "cyan", { Size = UDim2.fromOffset(130, 40), Position = UDim2.new(1, -12, 0, 132),
+		AnchorPoint = Vector2.new(1, 0), TextSize = 14, Props = { Name = "OrbitsToggle", Visible = false } }, function()
+		slotsPanel.Expanded = not slotsPanel.Expanded
+		Universe.refreshSlotsPanel()
+	end)
+	slotsPanel = { Frame = panel, Title = title, List = list, CameraButton = cameraButton, Toggle = toggle, Expanded = false, Compact = false }
+	ctx.UI.onLayout(function(compact)
+		slotsPanel.Compact = compact
+		if compact then
+			panel.AnchorPoint = Vector2.new(1, 0.5)
+			panel.Position = UDim2.new(1, -330, 0.5, 0)
+		else
+			panel.AnchorPoint = Vector2.new(1, 0.5)
+			panel.Position = UDim2.new(1, -16, 0.5, 6)
+		end
+		Universe.refreshSlotsPanel()
+	end)
 end
 
-local function refreshSlotsPanel()
+local refreshSlotsPanel
+refreshSlotsPanel = function()
 	if not slotsPanel then return end
 	local Kit, Theme = ctx.Kit, ctx.Theme
 	local C = Theme.Colors
 	if not current then
 		slotsPanel.Frame.Visible = false
+		slotsPanel.Toggle.Visible = false
 		return
 	end
 	local view = current.View
 	local isOwner = view.Owner == player.UserId
-	slotsPanel.Frame.Visible = true
+	slotsPanel.Toggle.Visible = slotsPanel.Compact
+	slotsPanel.Frame.Visible = (not slotsPanel.Compact) or slotsPanel.Expanded
+	if not slotsPanel.Frame.Visible then return end
 	slotsPanel.Title.Text = "ÓRBITAS · " .. string.upper((string.gsub(Defs.Galaxy.ById[view.System].Name, " System", "")))
 	Kit.clear(slotsPanel.List)
 	for slot = 1, Config.Economy.SlotsPerSystem do
@@ -7631,7 +7816,7 @@ local function refreshSlotsPanel()
 				end
 			end
 		elseif slot <= view.Slots then
-			text = slot .. " · " .. (isOwner and "＋ Colocar planeta" or "Vacía")
+			text = slot .. " · " .. (isOwner and "+ Colocar planeta" or "Vacía")
 			style, enabled = isOwner and "green" or "ghost", isOwner
 			action = function()
 				ctx.UI.open("Inventory", { PlaceSlot = slot })
@@ -8096,7 +8281,7 @@ function Kit.panel(parent, opts)
 		BackgroundTransparency = 0.2, BackgroundColor3 = Color3.new(1, 1, 1) })
 	Kit.gradient(line, C.Cyan, C.Violet, 0)
 	if opts.OnClose then
-		Kit.button(header, "✕", "danger", { Size = UDim2.fromOffset(36, 36), Position = UDim2.new(1, -46, 0, 9), TextSize = 18 }, opts.OnClose).Name = "Close"
+		Kit.button(header, "X", "danger", { Size = UDim2.fromOffset(36, 36), Position = UDim2.new(1, -46, 0, 9), TextSize = 18 }, opts.OnClose).Name = "Close"
 	end
 	local body = Kit.frame(frame, { Name = "Body", Position = UDim2.fromOffset(16, 64), Size = UDim2.new(1, -32, 1, -78) })
 	frame.Parent = parent
@@ -8779,22 +8964,25 @@ return function(ctx, parent)
 			Kit.listLayout(info, 5, false)
 			if state == "unlocked" then
 				local found, total = Progression.discoveredInSystem(data, def.Id)
-				local _, setCollection = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Violet })
+				local barCollection, setCollection = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Violet })
+				barCollection.LayoutOrder = 1
 				setCollection(found / total, "Colección " .. found .. "/" .. total)
 				local placed = Progression.placedCount(data, def.Id)
 				local slots = data.Slots[def.Id] or 0
-				local _, setSlots = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Cyan })
+				local barSlots, setSlots = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 20), Color = C.Cyan })
+				barSlots.LayoutOrder = 2
 				setSlots(placed / Defs.Config.Economy.SlotsPerSystem, "Órbitas " .. placed .. "/" .. slots .. " (máx. 8)")
 				local breakdown = data._Production and data._Production.Systems[def.Id]
 				Kit.label(info, "⚡ " .. Format.rate(breakdown and breakdown.Total or 0) .. " antes de mejoras", { Size = UDim2.new(1, 0, 0, 18),
-					TextSize = 11, Color = C.TextDim, Font = F.Body })
+					TextSize = 11, Color = C.TextDim, Font = F.Body, Props = { LayoutOrder = 3 } })
 				local reward = def.Reward
 				Kit.label(info, (data.CollectionsClaimed[def.Id] and "✔ " or "🎁 ") .. "Colección completa: +" .. reward.Stardust .. " ✨ y +"
 					.. math.floor(reward.ProductionBonus * 100) .. "% producción", { Size = UDim2.new(1, 0, 0, 34), TextSize = 11, Wrap = true,
-					Color = data.CollectionsClaimed[def.Id] and C.Green or C.TextDim, Font = F.Body })
+					Color = data.CollectionsClaimed[def.Id] and C.Green or C.TextDim, Font = F.Body, Props = { LayoutOrder = 4 } })
 			else
 				for i, check in ipairs(checks) do
-					local _, set = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 16), Color = check.Ok and C.Green or C.Gold })
+					local bar, set = Kit.progress(info, { Size = UDim2.new(1, 0, 0, 16), Color = check.Ok and C.Green or C.Gold })
+					bar.LayoutOrder = i * 2 - 1
 					set(check.Goal > 0 and check.Current / check.Goal or 0, (check.Ok and "✔ " or "") .. Format.number(check.Current) .. " / "
 						.. Format.number(check.Goal))
 					Kit.label(info, check.Text, { Size = UDim2.new(1, 0, 0, 28), TextSize = 10, Wrap = true, Color = check.Ok and C.Green or C.TextDim,
@@ -9223,7 +9411,7 @@ return function(ctx, parent)
 		{ "Value", "Valor", function(v) return Format.number(v) end },
 		{ "Ascensions", "Ascensiones", function(v) return "👑 " .. Format.number(v) end },
 		{ "Discoveries", "Descubiertos", function(v) return "📖 " .. Format.number(v) end },
-		{ "Rares", "Raros", function(v) return "✦ " .. Format.number(v) end },
+		{ "Rares", "Raros", function(v) return "🟣 " .. Format.number(v) end },
 	}
 	local tab = 1
 	local list = Kit.scroll(body, { Size = UDim2.new(1, 0, 1, -46), Position = UDim2.fromOffset(0, 46), Padding = 5 })
@@ -9356,7 +9544,7 @@ end
 return function(ctx, parent)
 	local Kit, State, Defs, Format, Progression, Theme = ctx.Kit, ctx.State, ctx.Defs, ctx.Format, ctx.Progression, ctx.Theme
 	local C, F = Theme.Colors, Theme.Fonts
-	local frame, body = Kit.panel(parent, { Name = "RebirthUI", Size = UDim2.fromOffset(820, 570), Title = "Galactic Ascension", Icon = "♻",
+	local frame, body = Kit.panel(parent, { Name = "RebirthUI", Size = UDim2.fromOffset(820, 570), Title = "Galactic Ascension", Icon = "🔄",
 		OnClose = function() ctx.UI.close() end })
 
 	local function count(t)
@@ -9394,7 +9582,7 @@ return function(ctx, parent)
 			local check = Progression.checkRequirement(data, req, State.rate())
 			if not check.Ok then allOk = false end
 			local y = 144 + (i - 1) * 30
-			Kit.label(body, (check.Ok and "✔ " or "✖ ") .. check.Text, { Size = UDim2.new(0.56, 0, 0, 24), Position = UDim2.fromOffset(0, y),
+			Kit.label(body, (check.Ok and "✔ " or "❌ ") .. check.Text, { Size = UDim2.new(0.56, 0, 0, 24), Position = UDim2.fromOffset(0, y),
 				TextSize = 13, Color = check.Ok and C.Green or C.Text })
 			local _, set = Kit.progress(body, { Size = UDim2.new(0.42, 0, 0, 20), Position = UDim2.new(0.58, 0, 0, y + 2),
 				Color = check.Ok and C.Green or C.Gold })
@@ -9440,7 +9628,7 @@ return function(ctx, parent)
 			Color = C.Gold })
 		local button = Kit.button(body, "ASCENDER", "gold", { Size = UDim2.fromOffset(280, 46), Position = UDim2.new(1, -280, 1, -48), TextSize = 19,
 			Font = F.Black, Props = { Name = "Ascend" } }, function()
-			ctx.UI.confirm({ Title = "Confirmar ascensión", Icon = "♻", Confirm = "Sí, ascender", Style = "gold",
+			ctx.UI.confirm({ Title = "Confirmar ascensión", Icon = "🔄", Confirm = "Sí, ascender", Style = "gold",
 				Text = "Vas a reiniciar tu Energy, tus mejoras con Energy, tus sistemas y tus slots. Conservas todos tus planetas, tu colección, "
 					.. "Stardust y Cosmic Cores. Recibirás producción permanente " .. Format.mult(milestone.Multiplier) .. " y +" .. milestone.Cores
 					.. " Cosmic Cores.",
@@ -9540,7 +9728,7 @@ end
 return function(ctx, parent)
 	local Kit, State, Defs, Format, Theme = ctx.Kit, ctx.State, ctx.Defs, ctx.Format, ctx.Theme
 	local C, F = Theme.Colors, Theme.Fonts
-	local frame, body = Kit.panel(parent, { Name = "ShopUI", Size = UDim2.fromOffset(760, 520), Title = "Tienda cosmética", Icon = "🛍️",
+	local frame, body = Kit.panel(parent, { Name = "ShopUI", Size = UDim2.fromOffset(760, 520), Title = "Tienda cosmética", Icon = "🛒",
 		OnClose = function() ctx.UI.close() end })
 	local tab = 1
 	local balance = Kit.label(body, "", { Size = UDim2.fromOffset(260, 36), Position = UDim2.new(1, -260, 0, 0), TextSize = 16,
@@ -9714,7 +9902,7 @@ return function(ctx, parent)
 			ctx.UI.close()
 		end
 	end
-	Kit.button(body, "🏛  Cosmic Hub", "cyan", { Size = UDim2.new(0.5, -6, 0, 56), TextSize = 17, Props = { Name = "Hub" } }, function() go("hub") end)
+	Kit.button(body, "🏠  Cosmic Hub", "cyan", { Size = UDim2.new(0.5, -6, 0, 56), TextSize = 17, Props = { Name = "Hub" } }, function() go("hub") end)
 	Kit.button(body, "🌌  Mi universo", "primary", { Size = UDim2.new(0.5, -6, 0, 56), Position = UDim2.new(0.5, 6, 0, 0), TextSize = 17,
 		Props = { Name = "Universe" } }, function() go("universe") end)
 	Kit.label(body, "UNIVERSOS DE OTROS JUGADORES (solo lectura)", { Size = UDim2.new(1, 0, 0, 22), Position = UDim2.fromOffset(0, 68), TextSize = 12,
@@ -9808,7 +9996,7 @@ return function(ctx, parent)
 			if other ~= Players.LocalPlayer then
 				others = others + 1
 				local row = Kit.box(players, C.Row, 0.1, { Size = UDim2.new(1, -6, 0, 56), LayoutOrder = index, Name = "Player_" .. other.UserId }, 10)
-				Kit.label(row, "🧑‍🚀 " .. other.DisplayName, { Size = UDim2.new(1, -150, 1, 0), Position = UDim2.fromOffset(12, 0), TextSize = 15 })
+				Kit.label(row, "🚀 " .. other.DisplayName, { Size = UDim2.new(1, -150, 1, 0), Position = UDim2.fromOffset(12, 0), TextSize = 15 })
 				Kit.button(row, "Invitar", "primary", { Size = UDim2.fromOffset(120, 36), Position = UDim2.new(1, -130, 0, 10), TextSize = 13,
 					Props = { Name = "Invite" } }, function(button)
 					local result = ctx.UI.request("RequestTrade", other.UserId)

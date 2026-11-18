@@ -47,7 +47,7 @@ local pb = PlayerService.profile(b)
 ---------------------------------------------------------------- desbloqueo de sistema
 local r = call(a, "UnlockSystem", "nebula")
 assert(not r.Ok, "nebula desbloqueada sin requisitos")
-energy(a, 80000)
+energy(a, 155000)
 r = call(a, "UnlockSystem", "nebula")
 assert(not r.Ok, "nebula desbloqueada sin coleccion")
 for _, id in ipairs({ "terra", "rocanox", "dunaris", "glaciera" }) do give(a, id) end
@@ -55,7 +55,7 @@ r = call(a, "UnlockSystem", "void")
 assert(not r.Ok, "void sin nebula")
 r = call(a, "UnlockSystem", "nebula")
 assert(r.Ok, "nebula: " .. tostring(r.Error))
-assert(pa.Systems.nebula and pa.Slots.nebula == 3 and pa.Energy < 80000 + 250 - 74999)
+assert(pa.Systems.nebula and pa.Slots.nebula == 3 and pa.Energy < 155000 + 250 - 149999)
 r = call(a, "OpenCapsule", "nebula", 1)
 assert(not r.Ok, "capsula nebula sin saldo") -- quedan ~5k
 -- colocar en nebula requiere viajar (sistema activo)
@@ -67,7 +67,7 @@ assert(r.Ok)
 r = call(a, "EquipPlanet", uid, "nebula", 1)
 assert(r.Ok)
 SIM.advance(0.2)
-assert(math.abs(Production.rate(a) - 42 * 6) < 1e-6, "multiplicador de sistema nebula: " .. Production.rate(a))
+assert(math.abs(Production.rate(a) - 42 * 4) < 1e-6, "multiplicador de sistema nebula: " .. Production.rate(a))
 
 ---------------------------------------------------------------- sinergias y secretos
 r = call(a, "SetActiveSystem", "solar")
@@ -91,7 +91,7 @@ for _, inst in pairs(pa.Planets) do if inst.Id == "cryostar" then cryo = cryo + 
 assert(cryo == 1, "secreto entregado dos veces")
 local prod = Production.rate(a)
 -- 3 glaciera (22) con trio glacial +15% + nebula 252
-assert(math.abs(prod - (66 * 1.15 + 252)) < 1e-6, "sinergia: " .. prod)
+assert(math.abs(prod - (66 * 1.15 + 168)) < 1e-6, "sinergia: " .. prod)
 
 ---------------------------------------------------------------- evolucion
 local t1 = give(a, "terra")
@@ -220,7 +220,7 @@ assert(not r.Ok, "ascension sin confirmar")
 server(function() pa.RunEnergy = 100 end)
 r = call(a, "Rebirth", true)
 assert(not r.Ok, "ascension sin la Energy generada requerida")
-server(function() pa.RunEnergy = 30000 end)
+server(function() pa.RunEnergy = 600000 end)
 local planetsBefore = count(pa.Planets)
 local discoveredBefore = count(pa.Discovered)
 r = call(a, "Rebirth", true)

@@ -14,7 +14,7 @@ local STEPS = {
 		Target = "Capsule" },
 	go_universe = { Text = "Paso 2 · ¡Ya tienes planetas! Viaja a tu universo personal con la tarjeta «Tu Universo» o por el Portal Room.",
 		Target = "UniverseCard" },
-	place_planet = { Text = "Paso 3 · Coloca un planeta: usa el panel ÓRBITAS de la derecha (＋ Colocar planeta) o toca un marcador verde.",
+	place_planet = { Text = "Paso 3 · Coloca un planeta: usa el panel ÓRBITAS de la derecha (+ Colocar planeta) o toca un marcador verde.",
 		Target = nil },
 	watch_production = { Text = "Paso 4 · Tu planeta ya produce Energy cada segundo. Mira el contador ⚡ arriba a la izquierda.",
 		Button = "Entendido", Ack = "watch_production" },
@@ -85,6 +85,9 @@ function Tutorial.init(context)
 		ctx.UI.request("SkipTutorial")
 	end)
 	ctx.State.on("Tutorial", refresh)
+	ctx.UI.onLayout(function(compact)
+		banner.Position = compact and UDim2.new(0.5, 0, 1, -96) or UDim2.new(0.5, 0, 1, -130)
+	end)
 	refresh()
 	-- latido del resaltado
 	local t = 0

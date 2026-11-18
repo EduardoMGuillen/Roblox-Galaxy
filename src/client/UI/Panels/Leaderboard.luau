@@ -9,7 +9,7 @@ return function(ctx, parent)
 		{ "Value", "Valor", function(v) return Format.number(v) end },
 		{ "Ascensions", "Ascensiones", function(v) return "👑 " .. Format.number(v) end },
 		{ "Discoveries", "Descubiertos", function(v) return "📖 " .. Format.number(v) end },
-		{ "Rares", "Raros", function(v) return "✦ " .. Format.number(v) end },
+		{ "Rares", "Raros", function(v) return "🟣 " .. Format.number(v) end },
 	}
 	local tab = 1
 	local list = Kit.scroll(body, { Size = UDim2.new(1, 0, 1, -46), Position = UDim2.fromOffset(0, 46), Padding = 5 })

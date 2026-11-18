@@ -11,8 +11,8 @@ function Environment.apply()
 	Lighting.ClockTime = 0
 	Lighting.GeographicLatitude = 35
 	Lighting.Brightness = 1.6
-	Lighting.Ambient = Color3.fromRGB(86, 92, 130)
-	Lighting.OutdoorAmbient = Color3.fromRGB(96, 100, 150)
+	Lighting.Ambient = Color3.fromRGB(108, 114, 150)
+	Lighting.OutdoorAmbient = Color3.fromRGB(112, 116, 162)
 	Lighting.ColorShift_Top = Color3.fromRGB(120, 140, 255)
 	Lighting.ColorShift_Bottom = Color3.fromRGB(90, 60, 160)
 	Lighting.EnvironmentDiffuseScale = 0.45

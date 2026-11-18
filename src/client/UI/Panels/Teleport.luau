@@ -13,7 +13,7 @@ return function(ctx, parent)
 			ctx.UI.close()
 		end
 	end
-	Kit.button(body, "🏛  Cosmic Hub", "cyan", { Size = UDim2.new(0.5, -6, 0, 56), TextSize = 17, Props = { Name = "Hub" } }, function() go("hub") end)
+	Kit.button(body, "🏠  Cosmic Hub", "cyan", { Size = UDim2.new(0.5, -6, 0, 56), TextSize = 17, Props = { Name = "Hub" } }, function() go("hub") end)
 	Kit.button(body, "🌌  Mi universo", "primary", { Size = UDim2.new(0.5, -6, 0, 56), Position = UDim2.new(0.5, 6, 0, 0), TextSize = 17,
 		Props = { Name = "Universe" } }, function() go("universe") end)
 	Kit.label(body, "UNIVERSOS DE OTROS JUGADORES (solo lectura)", { Size = UDim2.new(1, 0, 0, 22), Position = UDim2.fromOffset(0, 68), TextSize = 12,

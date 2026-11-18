@@ -67,7 +67,8 @@ function DataService.load(player)
 	local locked = false
 	local loaded = nil
 	local isNew = false
-	local ok, err = retry(Config.Data.LoadRetries, function()
+	local attempts = RunService:IsStudio() and 2 or Config.Data.LoadRetries
+	local ok, err = retry(attempts, function()
 		locked = false
 		store:UpdateAsync(key(userId), function(old)
 			if old ~= nil and type(old) ~= "table" then

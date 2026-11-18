@@ -2,7 +2,7 @@
 return function(ctx, parent)
 	local Kit, State, Defs, Format, Theme = ctx.Kit, ctx.State, ctx.Defs, ctx.Format, ctx.Theme
 	local C, F = Theme.Colors, Theme.Fonts
-	local frame, body = Kit.panel(parent, { Name = "ShopUI", Size = UDim2.fromOffset(760, 520), Title = "Tienda cosmética", Icon = "🛍️",
+	local frame, body = Kit.panel(parent, { Name = "ShopUI", Size = UDim2.fromOffset(760, 520), Title = "Tienda cosmética", Icon = "🛒",
 		OnClose = function() ctx.UI.close() end })
 	local tab = 1
 	local balance = Kit.label(body, "", { Size = UDim2.fromOffset(260, 36), Position = UDim2.new(1, -260, 0, 0), TextSize = 16,

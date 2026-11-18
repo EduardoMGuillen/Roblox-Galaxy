@@ -3,7 +3,7 @@
 return function(ctx, parent)
 	local Kit, State, Defs, Format, Progression, Theme = ctx.Kit, ctx.State, ctx.Defs, ctx.Format, ctx.Progression, ctx.Theme
 	local C, F = Theme.Colors, Theme.Fonts
-	local frame, body = Kit.panel(parent, { Name = "RebirthUI", Size = UDim2.fromOffset(820, 570), Title = "Galactic Ascension", Icon = "♻",
+	local frame, body = Kit.panel(parent, { Name = "RebirthUI", Size = UDim2.fromOffset(820, 570), Title = "Galactic Ascension", Icon = "🔄",
 		OnClose = function() ctx.UI.close() end })
 
 	local function count(t)
@@ -41,7 +41,7 @@ return function(ctx, parent)
 			local check = Progression.checkRequirement(data, req, State.rate())
 			if not check.Ok then allOk = false end
 			local y = 144 + (i - 1) * 30
-			Kit.label(body, (check.Ok and "✔ " or "✖ ") .. check.Text, { Size = UDim2.new(0.56, 0, 0, 24), Position = UDim2.fromOffset(0, y),
+			Kit.label(body, (check.Ok and "✔ " or "❌ ") .. check.Text, { Size = UDim2.new(0.56, 0, 0, 24), Position = UDim2.fromOffset(0, y),
 				TextSize = 13, Color = check.Ok and C.Green or C.Text })
 			local _, set = Kit.progress(body, { Size = UDim2.new(0.42, 0, 0, 20), Position = UDim2.new(0.58, 0, 0, y + 2),
 				Color = check.Ok and C.Green or C.Gold })
@@ -87,7 +87,7 @@ return function(ctx, parent)
 			Color = C.Gold })
 		local button = Kit.button(body, "ASCENDER", "gold", { Size = UDim2.fromOffset(280, 46), Position = UDim2.new(1, -280, 1, -48), TextSize = 19,
 			Font = F.Black, Props = { Name = "Ascend" } }, function()
-			ctx.UI.confirm({ Title = "Confirmar ascensión", Icon = "♻", Confirm = "Sí, ascender", Style = "gold",
+			ctx.UI.confirm({ Title = "Confirmar ascensión", Icon = "🔄", Confirm = "Sí, ascender", Style = "gold",
 				Text = "Vas a reiniciar tu Energy, tus mejoras con Energy, tus sistemas y tus slots. Conservas todos tus planetas, tu colección, "
 					.. "Stardust y Cosmic Cores. Recibirás producción permanente " .. Format.mult(milestone.Multiplier) .. " y +" .. milestone.Cores
 					.. " Cosmic Cores.",

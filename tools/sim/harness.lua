@@ -108,8 +108,10 @@ function SIM.addPlayer(userId, name)
 	for _, c in ipairs(Methods.Instance.GetChildren(SIM.getService("StarterGui"))) do
 		SIM.setParent(Methods.Instance.Clone(c), gui)
 	end
-	runScriptsUnder(ps, "LocalScript", "client:" .. userId)
-	runScriptsUnder(gui, "LocalScript", "client:" .. userId)
+	if not SIM.noClient then
+		runScriptsUnder(ps, "LocalScript", "client:" .. userId)
+		runScriptsUnder(gui, "LocalScript", "client:" .. userId)
+	end
 	SIM.runReady()
 	return p
 end

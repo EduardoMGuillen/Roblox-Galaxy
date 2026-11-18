@@ -217,7 +217,7 @@ function Kit.panel(parent, opts)
 		BackgroundTransparency = 0.2, BackgroundColor3 = Color3.new(1, 1, 1) })
 	Kit.gradient(line, C.Cyan, C.Violet, 0)
 	if opts.OnClose then
-		Kit.button(header, "✕", "danger", { Size = UDim2.fromOffset(36, 36), Position = UDim2.new(1, -46, 0, 9), TextSize = 18 }, opts.OnClose).Name = "Close"
+		Kit.button(header, "X", "danger", { Size = UDim2.fromOffset(36, 36), Position = UDim2.new(1, -46, 0, 9), TextSize = 18 }, opts.OnClose).Name = "Close"
 	end
 	local body = Kit.frame(frame, { Name = "Body", Position = UDim2.fromOffset(16, 64), Size = UDim2.new(1, -32, 1, -78) })
 	frame.Parent = parent

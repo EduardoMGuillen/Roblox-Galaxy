@@ -260,11 +260,35 @@ function Progression.nextSlotCost(profile, systemId)
 	return Galaxy.ById[systemId].SlotCosts[owned + 1]
 end
 
+-- Valor de venta base de cada planeta: una fraccion del precio de la capsula mas barata que lo
+-- contiene, repartida de forma que el retorno esperado de abrir una capsula y vender todo sea
+-- Config.Economy.SellReturn (15%) de su precio. Asi vender nunca es rentable frente a comprar.
+local sellBase = nil
+local function buildSellBase()
+	sellBase = {}
+	for _, capsule in ipairs(Defs.Capsules.List) do
+		local rarities = 0
+		for _ in pairs(capsule.Odds) do
+			rarities = rarities + 1
+		end
+		for rarityId, pct in pairs(capsule.Odds) do
+			local weight = math.min(8, (1 / rarities) / (pct / 100))
+			for _, planetId in ipairs(capsule.Pools[rarityId]) do
+				if sellBase[planetId] == nil then
+					sellBase[planetId] = capsule.Price * Config.Economy.SellReturn * weight
+				end
+			end
+		end
+	end
+end
+
 function Progression.sellValue(inst)
-	local def = Planets.ById[inst.Id]
-	local sysMult = Galaxy.ById[def.System].Multiplier
-	return math.floor(Progression.planetRate(inst) * Config.Economy.SellValueSeconds * math.sqrt(sysMult)
-		* Rarities.ById[def.Rarity].SellMult)
+	if not sellBase then buildSellBase() end
+	local value = sellBase[inst.Id] or 1
+	-- las variantes y la forma Prime valen algo mas, con tope para no crear bucles de dinero
+	value = value * math.min(3, Variants.get(inst.V).Multiplier)
+	if inst.E then value = value * 2 end
+	return math.max(1, math.floor(value))
 end
 
 function Progression.evolutionCost(def)

@@ -5,13 +5,13 @@ Variants.Order = { "none", "shiny", "golden", "rainbow", "cosmic" }
 
 Variants.ById = {
 	none = { Id = "none", Name = "Normal", Chance = 0, Multiplier = 1, Color = Color3.fromRGB(200, 215, 235), Icon = "" },
-	shiny = { Id = "shiny", Name = "Shiny", Chance = 0.04, Multiplier = 1.5, Color = Color3.fromRGB(190, 240, 255), Icon = "✧",
+	shiny = { Id = "shiny", Name = "Shiny", Chance = 0.04, Multiplier = 1.5, Color = Color3.fromRGB(190, 240, 255), Icon = "✨",
 		Description = "Brillo especial y reflejo marcado." },
-	golden = { Id = "golden", Name = "Golden", Chance = 0.02, Multiplier = 2, Color = Color3.fromRGB(255, 205, 70), Icon = "❖",
+	golden = { Id = "golden", Name = "Golden", Chance = 0.02, Multiplier = 2, Color = Color3.fromRGB(255, 205, 70), Icon = "🟡",
 		Description = "Superficie dorada con partículas cálidas." },
-	rainbow = { Id = "rainbow", Name = "Rainbow", Chance = 0.005, Multiplier = 3.5, Color = Color3.fromRGB(255, 120, 220), Icon = "❋",
+	rainbow = { Id = "rainbow", Name = "Rainbow", Chance = 0.005, Multiplier = 3.5, Color = Color3.fromRGB(255, 120, 220), Icon = "🌈",
 		Description = "Iridiscencia multicolor de transición suave." },
-	cosmic = { Id = "cosmic", Name = "Cosmic", Chance = 0.001, Multiplier = 6, Color = Color3.fromRGB(150, 110, 255), Icon = "✺",
+	cosmic = { Id = "cosmic", Name = "Cosmic", Chance = 0.001, Multiplier = 6, Color = Color3.fromRGB(150, 110, 255), Icon = "🌌",
 		Description = "Textura galáctica con partículas cósmicas." },
 }
 

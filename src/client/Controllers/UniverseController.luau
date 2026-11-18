@@ -89,8 +89,9 @@ local function buildStar(view, theme, folder, low)
 		local core = Build.ball({ Position = center, Radius = radius * 0.96 }, { Name = "Core", Color = theme.Star, Material = Enum.Material.Neon,
 			CanCollide = false, Parent = star })
 		if Assets.SphereMesh ~= 0 and Assets.texture("sun") ~= "" then
+			-- superficie texturizada semitransparente sobre el nucleo de neon (aspecto emisivo con detalle)
 			local surface = Build.decor({ Name = "Surface", Size = Vector3.new(1, 1, 1), CFrame = CFrame.new(center), Color = theme.Star,
-				Material = Enum.Material.Neon, Parent = star })
+				Transparency = 0.35, Parent = star })
 			local mesh = Instance.new("SpecialMesh")
 			mesh.MeshType = Enum.MeshType.FileMesh
 			mesh.MeshId = Assets.url(Assets.SphereMesh)
@@ -320,7 +321,7 @@ local function addMarker(slot, kind, view)
 	part:SetAttribute("Slot", slot)
 	part:SetAttribute("Kind", kind)
 	if kind == "empty" then
-		nameTag(part, "＋ Órbita " .. slot, "Colocar planeta", Color3.fromRGB(150, 255, 200), 5)
+		nameTag(part, "+ Órbita " .. slot, "Colocar planeta", Color3.fromRGB(150, 255, 200), 5)
 	else
 		local cost = Progression.nextSlotCost(ctx.State.Data, view.System) or 0
 		nameTag(part, "🔒 Órbita " .. slot, "⚡ " .. Format.number(cost), Color3.fromRGB(255, 215, 120), 5)
@@ -443,20 +444,41 @@ local function buildSlotsPanel()
 		Props = { Name = "CameraToggle" } }, function()
 		if ctx.Camera then ctx.Camera.toggleOverview() end
 	end)
-	slotsPanel = { Frame = panel, Title = title, List = list, CameraButton = cameraButton }
+	-- en moviles el panel se pliega tras un boton para no tapar el universo
+	local toggle = Kit.button(root, "🪐 Órbitas", "cyan", { Size = UDim2.fromOffset(130, 40), Position = UDim2.new(1, -12, 0, 132),
+		AnchorPoint = Vector2.new(1, 0), TextSize = 14, Props = { Name = "OrbitsToggle", Visible = false } }, function()
+		slotsPanel.Expanded = not slotsPanel.Expanded
+		Universe.refreshSlotsPanel()
+	end)
+	slotsPanel = { Frame = panel, Title = title, List = list, CameraButton = cameraButton, Toggle = toggle, Expanded = false, Compact = false }
+	ctx.UI.onLayout(function(compact)
+		slotsPanel.Compact = compact
+		if compact then
+			panel.AnchorPoint = Vector2.new(1, 0.5)
+			panel.Position = UDim2.new(1, -330, 0.5, 0)
+		else
+			panel.AnchorPoint = Vector2.new(1, 0.5)
+			panel.Position = UDim2.new(1, -16, 0.5, 6)
+		end
+		Universe.refreshSlotsPanel()
+	end)
 end
 
-local function refreshSlotsPanel()
+local refreshSlotsPanel
+refreshSlotsPanel = function()
 	if not slotsPanel then return end
 	local Kit, Theme = ctx.Kit, ctx.Theme
 	local C = Theme.Colors
 	if not current then
 		slotsPanel.Frame.Visible = false
+		slotsPanel.Toggle.Visible = false
 		return
 	end
 	local view = current.View
 	local isOwner = view.Owner == player.UserId
-	slotsPanel.Frame.Visible = true
+	slotsPanel.Toggle.Visible = slotsPanel.Compact
+	slotsPanel.Frame.Visible = (not slotsPanel.Compact) or slotsPanel.Expanded
+	if not slotsPanel.Frame.Visible then return end
 	slotsPanel.Title.Text = "ÓRBITAS · " .. string.upper((string.gsub(Defs.Galaxy.ById[view.System].Name, " System", "")))
 	Kit.clear(slotsPanel.List)
 	for slot = 1, Config.Economy.SlotsPerSystem do
@@ -476,7 +498,7 @@ local function refreshSlotsPanel()
 				end
 			end
 		elseif slot <= view.Slots then
-			text = slot .. " · " .. (isOwner and "＋ Colocar planeta" or "Vacía")
+			text = slot .. " · " .. (isOwner and "+ Colocar planeta" or "Vacía")
 			style, enabled = isOwner and "green" or "ghost", isOwner
 			action = function()
 				ctx.UI.open("Inventory", { PlaceSlot = slot })

@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 *.rbxlx.lock
 *.rbxl.lock
+# volcados generados por las herramientas de vista previa
+tools/sim/data/ui_dump.json
+tools/sim/data/world_dump.txt
